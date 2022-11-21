@@ -5,10 +5,13 @@
 package View;
 
 import DomainModel.ChatLieu;
+import DomainModel.MauSac;
+import Service.IMauSacService;
 import Service.Impl.ChatLieuService;
+import Service.Impl.MauSacService;
 import ViewModel.ChatLieuViewModel;
 
-//import ViewModels.MauSacRespone;
+import ViewModel.MauSacRespone;
 import java.awt.Button;
 import java.util.List;
 import javax.swing.ButtonGroup;
@@ -25,11 +28,13 @@ public class FrameQuanLy extends javax.swing.JFrame {
     private ButtonGroup btg;
     private ChatLieuService cls;
     private DefaultTableModel dtmChatLieu;
-
+ private IMauSacService mauSacService;
+    private DefaultTableModel dtm;
+//    private IKichCoService kcs;
     public FrameQuanLy() {
         initComponents();
 
-       
+        mauSacService = new MauSacService();
         cls = new ChatLieuService();
         setLocationRelativeTo(null);
         this.btg = new ButtonGroup();
@@ -48,20 +53,20 @@ public class FrameQuanLy extends javax.swing.JFrame {
         txtTen.setText("");
     }
 
-//    public MauSac getFormMau() {
-//        String ma = txtMa.getText().trim();
-//        String ten = txtTen.getText().trim();
-//
-//        if (ma.length() == 0 || ten.length() == 0) {
-//            JOptionPane.showMessageDialog(this, "Không được để trống");
-//            return null;
-//        }
-//
-//        MauSac ms = new MauSac();
-//        ms.setMa(ma);
-//        ms.setTen(ten);
-//        return ms;
-//    }
+    public MauSac getFormMau() {
+        String ma = txtMa.getText().trim();
+        String ten = txtTen.getText().trim();
+
+        if (ma.length() == 0 || ten.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            return null;
+        }
+
+        MauSac ms = new MauSac();
+        ms.setMa(ma);
+        ms.setTen(ten);
+        return ms;
+    }
 
 //    public KichCo getFormKichco() {
 //        String ma = txtMa.getText().trim();
@@ -481,17 +486,17 @@ public class FrameQuanLy extends javax.swing.JFrame {
         loadTableChatLieu();
     }//GEN-LAST:event_rdChatLieuActionPerformed
 
-//    public void loadTableMau() {
-//        int i = 1;
-//        dtm = (DefaultTableModel) tbThuocTinh.getModel();
-//        dtm.setRowCount(0);
-//        for (MauSac ms : mauSacService.getAll()) {
-//            Object[] row = {
-//                i++, ms.getMa(), "Màu Sắc", ms.getTen()
-//            };
-//            dtm.addRow(row);
-//        }
-//    }
+    public void loadTableMau() {
+        int i = 1;
+        dtm = (DefaultTableModel) tbThuocTinh.getModel();
+        dtm.setRowCount(0);
+        for (MauSac ms : mauSacService.getAll()) {
+            Object[] row = {
+                i++, ms.getMa(), "Màu Sắc", ms.getTen()
+            };
+            dtm.addRow(row);
+        }
+    }
 
 //    public void loadTableKichCo() {
 //        int i = 1;
@@ -585,7 +590,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
     }
     private void rdMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdMauSacActionPerformed
 
-//        loadTableMau();
+        loadTableMau();
     }//GEN-LAST:event_rdMauSacActionPerformed
 
 
