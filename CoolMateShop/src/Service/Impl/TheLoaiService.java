@@ -49,9 +49,9 @@ public TheLoaiService(){
     }
 
     @Override
-    public Integer sua(String ma, TheLoai tl) {
+    public Integer sua(String matl, TheLoai tl) {
          try {
-            return tlr.sua(ma, tl);
+            return tlr.update(matl, tl);
         } catch (Exception e) {
             return -1;
         }

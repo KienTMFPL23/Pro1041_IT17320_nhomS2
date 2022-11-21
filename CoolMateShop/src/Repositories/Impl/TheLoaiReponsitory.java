@@ -62,7 +62,7 @@ public class TheLoaiReponsitory implements ITheLoaiReponsitory {
         String checkMa = null;
         try {
             Connection conn = DBcontext.getConnection();
-            String sql = "select ma from chatlieu where ma = ?";
+            String sql = "select matl from chatlieu where matl = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ma);
             ps.execute();
@@ -81,7 +81,7 @@ public class TheLoaiReponsitory implements ITheLoaiReponsitory {
     public Integer xoa(String ma) {
         try {
             Connection conn = DBcontext.getConnection();
-            String sql = "delete from theloai where ma = ?";
+            String sql = "delete from TheLoai where MaTL = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ma);
 
@@ -93,13 +93,14 @@ public class TheLoaiReponsitory implements ITheLoaiReponsitory {
     }
 
     @Override
-    public Integer sua(String ma, TheLoai tl) {
+    public Integer update(String matl, TheLoai tl) {
         try {
             Connection conn = DBcontext.getConnection();
-            String sql = "update theloai set ten = ? where ma = ?";
+            String sql = "update theloai set tentl = ? where matl = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, tl.getMatl());
-            ps.setString(2, ma);
+            ps.setString(1, tl.getTentl());
+            ps.setString(2, matl);
+
             return ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

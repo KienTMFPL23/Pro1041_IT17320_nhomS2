@@ -17,5 +17,5 @@ public interface ITheLoaiService {
     Integer them(TheLoai tl);
     String checkMa(String ma);
      Integer xoa(String ma);
-    Integer sua(String ma,TheLoai tl);
+    Integer sua(String matl,TheLoai tl);
 }
