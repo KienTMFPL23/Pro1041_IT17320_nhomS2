@@ -6,12 +6,16 @@ package View;
 
 import DomainModel.ChatLieu;
 import DomainModel.MauSac;
+import DomainModel.TheLoai;
 import Service.IMauSacService;
+import Service.ITheLoaiService;
 import Service.Impl.ChatLieuService;
 import Service.Impl.MauSacService;
+import Service.Impl.TheLoaiService;
 import ViewModel.ChatLieuViewModel;
 
 import ViewModel.MauSacRespone;
+import ViewModel.TheLoaiViewModel;
 import java.awt.Button;
 import java.util.List;
 import javax.swing.ButtonGroup;
@@ -28,12 +32,15 @@ public class FrameQuanLy extends javax.swing.JFrame {
     private ButtonGroup btg;
     private ChatLieuService cls;
     private DefaultTableModel dtmChatLieu;
- private IMauSacService mauSacService;
+    private IMauSacService mauSacService;
     private DefaultTableModel dtm;
+    private DefaultTableModel dtmTheloai;
+    private ITheLoaiService tls;
 //    private IKichCoService kcs;
+
     public FrameQuanLy() {
         initComponents();
-
+        tls = new TheLoaiService();
         mauSacService = new MauSacService();
         cls = new ChatLieuService();
         setLocationRelativeTo(null);
@@ -83,7 +90,6 @@ public class FrameQuanLy extends javax.swing.JFrame {
 //        kc.setId(id);
 //        return kc;
 //    }
-
     public ChatLieu getFormChatLieu() {
         String ma = txtMa.getText().trim();
         String ten = txtTen.getText().trim();
@@ -123,8 +129,9 @@ public class FrameQuanLy extends javax.swing.JFrame {
             loadTableChatLieu();
             clearForm();
         }
-}
-        @SuppressWarnings("unchecked")
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -538,7 +545,6 @@ public class FrameQuanLy extends javax.swing.JFrame {
 //        loadTableKichCo();
 //        clearForm();
 //    }
-
 //    public void XoaKichCo() {
 //        int row = tbThuocTinh.getSelectedRow();
 //        if (row == -1) {
@@ -555,7 +561,6 @@ public class FrameQuanLy extends javax.swing.JFrame {
 //        loadTableKichCo();
 //        clearForm();
 //    }
-
     public void xoaChatLieu() {
         int row = tbThuocTinh.getSelectedRow();
         if (row == -1) {
@@ -586,6 +591,76 @@ public class FrameQuanLy extends javax.swing.JFrame {
         }
         this.cls.sua(cl, maStr);
         loadTableChatLieu();
+        clearForm();
+    }
+
+    public void loadTableTheLoai() {
+        int i = 1;
+        dtmTheloai = (DefaultTableModel) tbThuocTinh.getModel();
+        dtmTheloai.setRowCount(0);
+        for (TheLoaiViewModel tl : this.tls.getlist()) {
+            dtmTheloai.addRow(new Object[]{i++, tl.getMatl(), "Kích Cỡ", tl.getTentl()});
+        }
+    }
+     public TheLoai getFormTheLoai() {
+        String ma = txtMa.getText().trim();
+        String ten = txtTen.getText().trim();
+        String id = "";
+        if (ma.length() == 0 || ten.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            return null;
+        }
+
+        TheLoai tl  = new TheLoai();
+        tl.setMatl(ma);
+        tl.setTentl(ten);
+        tl.setId(id);
+        return tl;
+    }
+     public void themTheLoai(){
+        String maStr = txtMa.getText().trim();
+        if (this.tls.checkMa(maStr) != null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập  mã ko trùng");
+            return;
+        } else {
+            TheLoai tl = this.getFormTheLoai();
+            if (tl == null) {
+                return;
+            }
+            tls.them(tl);
+            loadTableTheLoai();
+            clearForm();
+        }
+        }
+    public void xoaTheloai(){
+         int row = tbThuocTinh.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xoá ");
+
+            return;
+        }
+        String maStr = tbThuocTinh.getValueAt(row, 1).toString();
+        int check = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xoá dòng này chứ");
+        if (check != JOptionPane.YES_OPTION) {
+            return;
+        }
+        this.tls.xoa(maStr);
+        loadTableTheLoai();
+        clearForm();
+    }
+    public void suaTheLoai() {
+        int row = tbThuocTinh.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần sửa ");
+            return;
+        }
+        String maStr = tbThuocTinh.getValueAt(row, 1).toString();
+        TheLoai tl = this.getFormTheLoai();
+        if (tl == null) {
+            return;
+        }
+        tls.sua(maStr, tl);
+        loadTableTheLoai();
         clearForm();
     }
     private void rdMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdMauSacActionPerformed
