@@ -16,6 +16,6 @@ public interface ITheLoaiReponsitory {
     ArrayList<TheLoaiViewModel> selectAll();
     Integer them(TheLoai tl);
     String checkMa(String ma);
-    Integer xoa(String ma);
-    Integer sua(String ma,TheLoai tl);
+   Integer xoa(String ma);
+   Integer update(String matl,TheLoai tl);
 }
