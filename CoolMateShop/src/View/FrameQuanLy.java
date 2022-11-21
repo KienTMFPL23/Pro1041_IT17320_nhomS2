@@ -5,14 +5,18 @@
 package View;
 
 import DomainModel.ChatLieu;
+import DomainModel.KichCo;
 import DomainModel.MauSac;
 import DomainModel.TheLoai;
+import Service.IKichCoService;
 import Service.IMauSacService;
 import Service.ITheLoaiService;
 import Service.Impl.ChatLieuService;
+import Service.Impl.KichCoService;
 import Service.Impl.MauSacService;
 import Service.Impl.TheLoaiService;
 import ViewModel.ChatLieuViewModel;
+import ViewModel.KichCoRepon;
 
 import ViewModel.MauSacRespone;
 import ViewModel.TheLoaiViewModel;
@@ -36,11 +40,12 @@ public class FrameQuanLy extends javax.swing.JFrame {
     private DefaultTableModel dtm;
     private DefaultTableModel dtmTheloai;
     private ITheLoaiService tls;
-//    private IKichCoService kcs;
+    private IKichCoService kcs;
 
     public FrameQuanLy() {
         initComponents();
         tls = new TheLoaiService();
+        kcs = new KichCoService();
         mauSacService = new MauSacService();
         cls = new ChatLieuService();
         setLocationRelativeTo(null);
@@ -75,21 +80,22 @@ public class FrameQuanLy extends javax.swing.JFrame {
         return ms;
     }
 
-//    public KichCo getFormKichco() {
-//        String ma = txtMa.getText().trim();
-//        String ten = txtTen.getText().trim();
-//        String id = "";
-//        if (ma.length() == 0 || ten.length() == 0) {
-//            JOptionPane.showMessageDialog(this, "Không được để trống");
-//            return null;
-//        }
-//
-//        KichCo kc = new KichCo();
-//        kc.setMa(ma);
-//        kc.setSize(ten);
-//        kc.setId(id);
-//        return kc;
-//    }
+    public KichCo getFormKichco() {
+        String ma = txtMa.getText().trim();
+        String ten = txtTen.getText().trim();
+        String id = "";
+        if (ma.length() == 0 || ten.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            return null;
+        }
+
+        KichCo kc = new KichCo();
+        kc.setMa(ma);
+        kc.setSize(ten);
+        kc.setId(id);
+        return kc;
+    }
+
     public ChatLieu getFormChatLieu() {
         String ma = txtMa.getText().trim();
         String ten = txtTen.getText().trim();
@@ -283,6 +289,11 @@ public class FrameQuanLy extends javax.swing.JFrame {
         });
 
         rdTheLoai.setText("Thể loại");
+        rdTheLoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdTheLoaiActionPerformed(evt);
+            }
+        });
 
         rdChatLieu.setText("Chất liệu");
         rdChatLieu.addActionListener(new java.awt.event.ActionListener() {
@@ -505,62 +516,64 @@ public class FrameQuanLy extends javax.swing.JFrame {
         }
     }
 
-//    public void loadTableKichCo() {
-//        int i = 1;
-//        dtmKichCo = (DefaultTableModel) tbThuocTinh.getModel();
-//        dtmKichCo.setRowCount(0);
-//        for (KichCoRepon kc : this.kcs.getList()) {
-//            dtmKichCo.addRow(new Object[]{i++, kc.getMaKC(), "Kích Cỡ", kc.getTenKC()});
-//        }
-//    }
-//
-//    public void themKichCo() {
-//        String maStr = txtMa.getText().trim();
-//        if (this.kcs.checkMa(maStr) != null) {
-//            JOptionPane.showMessageDialog(this, "Vui lòng nhập  mã ko trùng");
-//            return;
-//        } else {
-//            KichCo kc = this.getFormKichco();
-//            if (kc == null) {
-//                return;
-//            }
-//            kcs.insert(kc);
-//            loadTableKichCo();
-//            clearForm();
-//        }
-//    }
-//
-//    public void suaKichCo() {
-//        int row = tbThuocTinh.getSelectedRow();
-//        if (row == -1) {
-//            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần sửa ");
-//            return;
-//        }
-//        String maStr = tbThuocTinh.getValueAt(row, 1).toString();
-//        KichCo kc = this.getFormKichco();
-//        if (kc == null) {
-//            return;
-//        }
-//        kcs.update(maStr, kc);
-//        loadTableKichCo();
-//        clearForm();
-//    }
-//    public void XoaKichCo() {
-//        int row = tbThuocTinh.getSelectedRow();
-//        if (row == -1) {
-//            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xoá ");
-//
-//            return;
-//        }
-//        String maStr = tbThuocTinh.getValueAt(row, 1).toString();
-//        int check = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xoá dòng này chứ");
-//        if (check != JOptionPane.YES_OPTION) {
-//            return;
-//        }
-//        this.kcs.delete(maStr);
-//        loadTableKichCo();
-//        clearForm();
-//    }
+    public void loadTableKichCo() {
+        int i = 1;
+        dtmKichCo = (DefaultTableModel) tbThuocTinh.getModel();
+        dtmKichCo.setRowCount(0);
+        for (KichCoRepon kc : this.kcs.getList()) {
+            dtmKichCo.addRow(new Object[]{i++, kc.getMaKC(), "Kích Cỡ", kc.getTenKC()});
+        }
+    }
+
+    public void themKichCo() {
+        String maStr = txtMa.getText().trim();
+        if (this.kcs.checkMa(maStr) != null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập  mã ko trùng");
+            return;
+        } else {
+            KichCo kc = this.getFormKichco();
+            if (kc == null) {
+                return;
+            }
+            kcs.insert(kc);
+            loadTableKichCo();
+            clearForm();
+        }
+    }
+
+    public void suaKichCo() {
+        int row = tbThuocTinh.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần sửa ");
+            return;
+        }
+        String maStr = tbThuocTinh.getValueAt(row, 1).toString();
+        KichCo kc = this.getFormKichco();
+        if (kc == null) {
+            return;
+        }
+        kcs.update(maStr, kc);
+        loadTableKichCo();
+        clearForm();
+    }
+
+    public void XoaKichCo() {
+        int row = tbThuocTinh.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xoá ");
+
+            return;
+        }
+        String maStr = tbThuocTinh.getValueAt(row, 1).toString();
+        int check = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xoá dòng này chứ");
+        if (check != JOptionPane.YES_OPTION) {
+            return;
+        }
+        this.kcs.delete(maStr);
+        loadTableKichCo();
+        clearForm();
+    }
+
     public void xoaChatLieu() {
         int row = tbThuocTinh.getSelectedRow();
         if (row == -1) {
@@ -599,10 +612,11 @@ public class FrameQuanLy extends javax.swing.JFrame {
         dtmTheloai = (DefaultTableModel) tbThuocTinh.getModel();
         dtmTheloai.setRowCount(0);
         for (TheLoaiViewModel tl : this.tls.getlist()) {
-            dtmTheloai.addRow(new Object[]{i++, tl.getMatl(), "Kích Cỡ", tl.getTentl()});
+            dtmTheloai.addRow(new Object[]{i++, tl.getMatl(), "Thể Loại", tl.getTentl()});
         }
     }
-     public TheLoai getFormTheLoai() {
+
+    public TheLoai getFormTheLoai() {
         String ma = txtMa.getText().trim();
         String ten = txtTen.getText().trim();
         String id = "";
@@ -611,13 +625,14 @@ public class FrameQuanLy extends javax.swing.JFrame {
             return null;
         }
 
-        TheLoai tl  = new TheLoai();
+        TheLoai tl = new TheLoai();
         tl.setMatl(ma);
         tl.setTentl(ten);
         tl.setId(id);
         return tl;
     }
-     public void themTheLoai(){
+
+    public void themTheLoai() {
         String maStr = txtMa.getText().trim();
         if (this.tls.checkMa(maStr) != null) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập  mã ko trùng");
@@ -631,9 +646,10 @@ public class FrameQuanLy extends javax.swing.JFrame {
             loadTableTheLoai();
             clearForm();
         }
-        }
-    public void xoaTheloai(){
-         int row = tbThuocTinh.getSelectedRow();
+    }
+
+    public void xoaTheloai() {
+        int row = tbThuocTinh.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xoá ");
 
@@ -648,6 +664,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
         loadTableTheLoai();
         clearForm();
     }
+
     public void suaTheLoai() {
         int row = tbThuocTinh.getSelectedRow();
         if (row == -1) {
@@ -670,44 +687,48 @@ public class FrameQuanLy extends javax.swing.JFrame {
 
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-//        if (rdMauSac.isSelected()) {
-//            MauSac ms = this.getFormMau();
-//            if (ms == null) {
-//                return;
-//            }
-//            if (mauSacService.insert(ms) > 0) {
-//                loadTableMau();
-//                clearForm();
-//            }
-//        } else if (rdKichCo.isSelected()) {
-//            themKichCo();
-//
-//        } else if (rdChatLieu.isSelected()) {
-//            themchatlieu();
-//        }
+        if (rdMauSac.isSelected()) {
+            MauSac ms = this.getFormMau();
+            if (ms == null) {
+                return;
+            }
+            if (mauSacService.insert(ms) > 0) {
+                loadTableMau();
+                clearForm();
+            }
+        } else if (rdKichCo.isSelected()) {
+            themKichCo();
+
+        } else if (rdChatLieu.isSelected()) {
+            themchatlieu();
+        }else{
+            themTheLoai();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-//        int row = tbThuocTinh.getSelectedRow();
-//        String ma = tbThuocTinh.getValueAt(row, 1).toString();
-//        if (row == -1) {
-//            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng sửa");
-//            return;
-//        }
-//        if (rdMauSac.isSelected()) {
-//            MauSac ms = this.getFormMau();
-//            if (ms == null) {
-//                return;
-//            }
-//            if (mauSacService.update(ms, ms.getMa()) > 0) {
-//                loadTableMau();
-//                clearForm();
-//            }
-//        } else if (rdKichCo.isSelected()) {
-//            suaKichCo();
-//        } else if (rdChatLieu.isSelected()) {
-//            suaChatLieu();
-//        }
+        int row = tbThuocTinh.getSelectedRow();
+        String ma = tbThuocTinh.getValueAt(row, 1).toString();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng sửa");
+            return;
+        }
+        if (rdMauSac.isSelected()) {
+            MauSac ms = this.getFormMau();
+            if (ms == null) {
+                return;
+            }
+            if (mauSacService.update(ms, ms.getMa()) > 0) {
+                loadTableMau();
+                clearForm();
+            }
+        } else if (rdKichCo.isSelected()) {
+            suaKichCo();
+        } else if (rdChatLieu.isSelected()) {
+            suaChatLieu();
+        }else {
+            suaTheLoai();
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void tbThuocTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbThuocTinhMouseClicked
@@ -724,33 +745,43 @@ public class FrameQuanLy extends javax.swing.JFrame {
         } else if (rdChatLieu.isSelected()) {
             txtMa.setText(tbThuocTinh.getValueAt(row, 1).toString());
             txtTen.setText(tbThuocTinh.getValueAt(row, 3).toString());
-        }
+        }else {
+             txtMa.setText(tbThuocTinh.getValueAt(row, 1).toString());
+            txtTen.setText(tbThuocTinh.getValueAt(row, 3).toString());
+            }
     }//GEN-LAST:event_tbThuocTinhMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
 
-//        if (rdMauSac.isSelected()) {
-//            int row = tbThuocTinh.getSelectedRow();
-//            String ma = tbThuocTinh.getValueAt(row, 1).toString();
-//            if (row == -1) {
-//                JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng xóa");
-//                return;
-//            }
-//            if (mauSacService.delete(ma) > 0) {
-//                loadTableMau();
-//                clearForm();
-//            }
-//        } else if (rdKichCo.isSelected()) {
-//            XoaKichCo();
-//        } else if (rdChatLieu.isSelected()) {
-//            xoaChatLieu();
-//        }
+        if (rdMauSac.isSelected()) {
+            int row = tbThuocTinh.getSelectedRow();
+            String ma = tbThuocTinh.getValueAt(row, 1).toString();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng xóa");
+                return;
+            }
+            if (mauSacService.delete(ma) > 0) {
+                loadTableMau();
+                clearForm();
+            }
+        } else if (rdKichCo.isSelected()) {
+            XoaKichCo();
+        } else if (rdChatLieu.isSelected()) {
+            xoaChatLieu();
+        }else {
+            xoaTheloai();
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void rdKichCoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdKichCoActionPerformed
         // TODO add your handling code here:
-//        loadTableKichCo();
+        loadTableKichCo();
     }//GEN-LAST:event_rdKichCoActionPerformed
+
+    private void rdTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTheLoaiActionPerformed
+        // TODO add your handling code here:
+        loadTableTheLoai();
+    }//GEN-LAST:event_rdTheLoaiActionPerformed
 
     /**
      * @param args the command line arguments
