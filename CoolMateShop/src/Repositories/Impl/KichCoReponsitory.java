@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -80,9 +82,9 @@ public class KichCoReponsitory implements IKichCoReponsitory {
             Connection conn = DBcontext.getConnection();
             String sql = "Update KichCo set Size = ? where ma=? ";
             PreparedStatement ps = conn.prepareStatement(sql);
-           
+
             ps.setString(1, kc.getSize());
-             ps.setString(2, ma);
+            ps.setString(2, ma);
             return ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -101,7 +103,7 @@ public class KichCoReponsitory implements IKichCoReponsitory {
             ps.setString(1, ma);
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            while(rs.next()){
+            while (rs.next()) {
                 String maStr = rs.getString("Ma");
                 checkMa = ma;
             }
@@ -111,8 +113,28 @@ public class KichCoReponsitory implements IKichCoReponsitory {
         return checkMa;
     }
 
-    
+    @Override
+    public ArrayList<KichCo> getAll() {
+        ArrayList<KichCo> listkichCo = new ArrayList<>();
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "Select Id,Ma,Size from KichCo";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.execute();
 
-    
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                String size = rs.getString(3);
+
+                KichCo kc = new KichCo(id, ma, size);
+                listkichCo.add(kc);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listkichCo;
+    }
 
 }

@@ -18,18 +18,18 @@ import java.util.ArrayList;
  * @author BOSS
  */
 public class ChatLieuService implements IChatLieuService {
-    
+
     private IChatLieuReponsitory clr = new ChatLieuReponsity();
-    
+
     public ChatLieuService() {
         this.clr = new ChatLieuReponsity();
     }
-    
+
     @Override
     public ArrayList<ChatLieuViewModel> getList() {
         return this.clr.selectAll();
     }
-    
+
     @Override
     public Integer them(ChatLieu cl) {
         try {
@@ -38,7 +38,7 @@ public class ChatLieuService implements IChatLieuService {
             return -1;
         }
     }
-    
+
     @Override
     public Integer sua(ChatLieu cl, String ma) {
         try {
@@ -47,7 +47,7 @@ public class ChatLieuService implements IChatLieuService {
             return -1;
         }
     }
-    
+
     @Override
     public Integer xoa(String ma) {
         try {
@@ -61,5 +61,10 @@ public class ChatLieuService implements IChatLieuService {
     public String checkMa(String ma) {
         return this.clr.checkMa(ma);
     }
-    
+
+    @Override
+    public ArrayList<ChatLieu> getAll() {
+        return this.clr.getAll();
+    }
+
 }

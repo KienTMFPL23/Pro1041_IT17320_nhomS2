@@ -13,9 +13,16 @@ import java.util.ArrayList;
  * @author BOSS
  */
 public interface ITheLoaiReponsitory {
+
     ArrayList<TheLoaiViewModel> selectAll();
+
     Integer them(TheLoai tl);
+
     String checkMa(String ma);
-   Integer xoa(String ma);
-   Integer update(String matl,TheLoai tl);
+
+    Integer xoa(String ma);
+
+    Integer update(String matl, TheLoai tl);
+
+    ArrayList<TheLoai> getAll();
 }

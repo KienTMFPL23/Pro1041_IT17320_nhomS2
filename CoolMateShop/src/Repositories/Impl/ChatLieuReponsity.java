@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -76,18 +78,19 @@ public class ChatLieuReponsity implements IChatLieuReponsitory {
 
     @Override
     public Integer xoa(String ma) {
-try {
+        try {
             Connection conn = DBcontext.getConnection();
             String sql = "delete from chatlieu where ma = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-        
+
             ps.setString(1, ma);
 
             return ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;    }
+        return -1;
+    }
 
     @Override
     public String checkMa(String ma) {
@@ -97,16 +100,40 @@ try {
             String sql = "select ma from chatlieu where ma = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ma);
-                 ps.execute();
-                 ResultSet rs = ps.getResultSet();
-                 while(rs.next()){
-                     String Ma = rs.getString("Ma");
-                     checkMa = ma;
-                     
-                 }
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String Ma = rs.getString("Ma");
+                checkMa = ma;
+
+            }
         } catch (Exception e) {
         }
         return checkMa;
+    }
+
+    @Override
+    public ArrayList<ChatLieu> getAll() {
+        ArrayList<ChatLieu> listChatLieu = new ArrayList<>();
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "Select Id,Ma,Ten from ChatLieu ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                String ten = rs.getString(3);
+
+                ChatLieu cl = new ChatLieu(id, ma, ten);
+                listChatLieu.add(cl);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listChatLieu;
     }
 
 }

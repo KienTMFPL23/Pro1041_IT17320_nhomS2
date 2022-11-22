@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.html.HTMLDocument;
 
 /**
@@ -106,6 +108,30 @@ public class TheLoaiReponsitory implements ITheLoaiReponsitory {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    @Override
+    public ArrayList<TheLoai> getAll() {
+        ArrayList<TheLoai> listTheLoai = new ArrayList<>();
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "Select Id,MaTL,TenTL from TheLoai";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                String ten = rs.getString(3);
+
+                TheLoai tl = new TheLoai(id, ma, ten);
+                listTheLoai.add(tl);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listTheLoai;
     }
 
 }

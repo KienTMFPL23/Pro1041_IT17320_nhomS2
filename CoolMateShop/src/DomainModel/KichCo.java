@@ -9,7 +9,8 @@ package DomainModel;
  * @author BOSS
  */
 public class KichCo {
-    private String id ;
+
+    private String id;
     private String ma;
     private String size;
 
@@ -45,5 +46,10 @@ public class KichCo {
     public void setSize(String size) {
         this.size = size;
     }
-    
+
+    @Override
+    public String toString() {
+        return size;
+    }
+
 }

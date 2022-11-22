@@ -13,9 +13,16 @@ import java.util.ArrayList;
  * @author BOSS
  */
 public interface IChatLieuService {
+
     ArrayList<ChatLieuViewModel> getList();
+
     Integer them(ChatLieu cl);
-   Integer sua(ChatLieu cl , String ma);
-   Integer xoa(String ma);
-   String checkMa(String ma);
+
+    Integer sua(ChatLieu cl, String ma);
+
+    Integer xoa(String ma);
+
+    String checkMa(String ma);
+
+    ArrayList<ChatLieu> getAll();
 }

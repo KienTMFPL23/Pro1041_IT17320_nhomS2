@@ -24,11 +24,6 @@ public class MauSacService implements IMauSacService {
     }
 
     @Override
-    public List<MauSac> getAll() {
-        return msRepository.getAll();
-    }
-
-    @Override
     public Integer insert(MauSac ms) {
         try {
             return msRepository.insert(ms);
@@ -67,6 +62,16 @@ public class MauSacService implements IMauSacService {
     @Override
     public List<MauSacRespone> getAllMau() {
         return msRepository.getAllMau();
+    }
+
+    @Override
+    public MauSac getOne(String id) {
+        return msRepository.getOne(id);
+    }
+
+    @Override
+    public List<MauSac> getAll() {
+        return msRepository.getList();
     }
 
 }

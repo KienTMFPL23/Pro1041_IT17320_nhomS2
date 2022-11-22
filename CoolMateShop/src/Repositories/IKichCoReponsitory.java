@@ -24,4 +24,6 @@ public interface IKichCoReponsitory {
 
     String checkMa(String ma);
 
+    ArrayList<KichCo> getAll();
+
 }

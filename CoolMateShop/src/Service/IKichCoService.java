@@ -22,5 +22,10 @@ public interface IKichCoService {
     Integer delete(String ma);
 
     Integer update(String ma, KichCo kc);
+
     String checkMa(String ma);
+
+    ArrayList<KichCo> getAll();
+    
+    KichCo getOne(String id);
 }

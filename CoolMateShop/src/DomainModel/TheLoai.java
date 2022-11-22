@@ -9,6 +9,7 @@ package DomainModel;
  * @author BOSS
  */
 public class TheLoai {
+
     private String id;
     private String matl;
     private String tentl;
@@ -45,5 +46,10 @@ public class TheLoai {
 
     public TheLoai() {
     }
-    
+
+    @Override
+    public String toString() {
+        return tentl;
+    }
+
 }

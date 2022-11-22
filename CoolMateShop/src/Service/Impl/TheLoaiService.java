@@ -15,11 +15,14 @@ import java.util.ArrayList;
  *
  * @author BOSS
  */
-public class TheLoaiService  implements ITheLoaiService{
-private ITheLoaiReponsitory tlr = new TheLoaiReponsitory();
-public TheLoaiService(){
-    this.tlr =new TheLoaiReponsitory();
+public class TheLoaiService implements ITheLoaiService {
+
+    private ITheLoaiReponsitory tlr = new TheLoaiReponsitory();
+
+    public TheLoaiService() {
+        this.tlr = new TheLoaiReponsitory();
     }
+
     @Override
     public ArrayList<TheLoaiViewModel> getlist() {
         return this.tlr.selectAll();
@@ -41,7 +44,7 @@ public TheLoaiService(){
 
     @Override
     public Integer xoa(String ma) {
-         try {
+        try {
             return tlr.xoa(ma);
         } catch (Exception e) {
             return -1;
@@ -50,11 +53,16 @@ public TheLoaiService(){
 
     @Override
     public Integer sua(String matl, TheLoai tl) {
-         try {
+        try {
             return tlr.update(matl, tl);
         } catch (Exception e) {
             return -1;
         }
     }
-    
+
+    @Override
+    public ArrayList<TheLoai> getAll() {
+        return this.tlr.getAll();
+    }
+
 }
