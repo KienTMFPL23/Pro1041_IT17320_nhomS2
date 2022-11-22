@@ -5,6 +5,7 @@
 package Service.Impl;
 
 import DomainModel.KichCo;
+import DomainModel.MauSac;
 import Repositories.IKichCoReponsitory;
 import Repositories.Impl.KichCoReponsitory;
 import Service.IKichCoService;
@@ -16,18 +17,18 @@ import java.util.ArrayList;
  * @author BOSS
  */
 public class KichCoService implements IKichCoService {
-    
+
     private IKichCoReponsitory kcr = new KichCoReponsitory();
-    
+
     public KichCoService() {
         this.kcr = new KichCoReponsitory();
     }
-    
+
     @Override
     public ArrayList<KichCoRepon> getList() {
         return this.kcr.selectall();
     }
-    
+
     @Override
     public Integer insert(KichCo kc) {
         try {
@@ -36,7 +37,7 @@ public class KichCoService implements IKichCoService {
             return -1;
         }
     }
-    
+
     @Override
     public Integer delete(String ma) {
         try {
@@ -45,7 +46,7 @@ public class KichCoService implements IKichCoService {
             return -1;
         }
     }
-    
+
     @Override
     public Integer update(String ma, KichCo kc) {
         try {
@@ -59,5 +60,15 @@ public class KichCoService implements IKichCoService {
     public String checkMa(String ma) {
         return this.kcr.checkMa(ma);
     }
-    
+
+    @Override
+    public ArrayList<KichCo> getAll() {
+        return this.kcr.getAll();
+    }
+
+    @Override
+    public KichCo getOne(String id) {
+        return null;
+    }
+
 }

@@ -24,30 +24,6 @@ import java.util.logging.Logger;
 public class MauSacRepository implements IMauSacRepository {
 
     @Override
-    public List<MauSac> getAll() {
-        List<MauSac> listMau = new ArrayList<>();
-        try {
-            Connection conn = DBcontext.getConnection();
-            String sql = "Select Id,MaMau,TenMau from MauSac ";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.execute();
-
-            ResultSet rs = ps.getResultSet();
-            while (rs.next()) {
-                String id = rs.getString(1);
-                String ma = rs.getString(2);
-                String ten = rs.getString(3);
-
-                MauSac ms = new MauSac(id, ma, ten);
-                listMau.add(ms);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return listMau;
-    }
-
-    @Override
     public Integer insert(MauSac ms) {
         try {
             Connection conn = DBcontext.getConnection();
@@ -138,6 +114,54 @@ public class MauSacRepository implements IMauSacRepository {
             ex.printStackTrace();
         }
         return listMauSac;
+    }
+
+    @Override
+    public MauSac getOne(String id) {
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "Select Id,MaMau,TenMau from MauSac where Id = ? ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String idSearch = rs.getString(1);
+                String ma = rs.getString(2);
+                String ten = rs.getString(3);
+
+                MauSac ms = new MauSac(idSearch, ma, ten);
+                return ms;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<MauSac> getList() {
+        List<MauSac> listMau = new ArrayList<>();
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "Select Id,MaMau,TenMau from MauSac";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                String ten = rs.getString(3);
+
+                MauSac ms = new MauSac(id, ma, ten);
+                listMau.add(ms);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listMau;
     }
 
 }

@@ -13,9 +13,7 @@ import java.util.List;
  * @author KIEN TRAN
  */
 public interface IMauSacRepository {
-
-    List<MauSac> getAll();
-    
+ 
     List<MauSacRespone> getAllMau();
 
     Integer insert(MauSac ms);
@@ -25,4 +23,8 @@ public interface IMauSacRepository {
     Integer delete(String ma);
 
     String checkMa(String ma);
+    
+    MauSac getOne(String id);
+    
+    List<MauSac> getList();
 }

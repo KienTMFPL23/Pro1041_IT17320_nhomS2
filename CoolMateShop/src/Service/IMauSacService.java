@@ -14,7 +14,6 @@ import java.util.List;
  */
 public interface IMauSacService {
 
-    List<MauSac> getAll();
 
     List<MauSacRespone> getAllMau();
 
@@ -25,4 +24,8 @@ public interface IMauSacService {
     Integer delete(String ma);
 
     String checkMa(String ma);
+    
+    MauSac getOne(String id);
+    
+    List<MauSac> getAll();
 }

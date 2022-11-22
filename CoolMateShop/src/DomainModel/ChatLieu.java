@@ -9,6 +9,7 @@ package DomainModel;
  * @author BOSS
  */
 public class ChatLieu {
+
     private String id;
     private String ma;
     private String ten;
@@ -45,5 +46,10 @@ public class ChatLieu {
     public void setTen(String ten) {
         this.ten = ten;
     }
-    
+
+    @Override
+    public String toString() {
+        return ten;
+    }
+
 }
