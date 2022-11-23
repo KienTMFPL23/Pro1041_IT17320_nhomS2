@@ -15,6 +15,8 @@ import java.util.List;
 public interface IChiTietQuanAoRepository {
 
     List<ChiTietQuanAoRespone> getAll();
+    
+    List<ChiTietQuanAo> getQuanAo();
 
     Integer insert(ChiTietQuanAo ctqa);
 

@@ -148,4 +148,37 @@ public class ChiTietQuanAoRepository implements IChiTietQuanAoRepository {
         return maSearch;
     }
 
+    @Override
+    public List<ChiTietQuanAo> getQuanAo() {
+        List<ChiTietQuanAo> listCTQA = new ArrayList<>();
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "Select * from ChiTietQuanAo";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String idMau = rs.getString(2);
+                String idTL = rs.getString(3);
+                String idKC = rs.getString(4);
+                String idCL = rs.getString(5);
+                String tenQA = rs.getString(6);
+                String maQA = rs.getString(7);
+                Float giaBan = rs.getFloat(8);
+                Integer soLuong = rs.getInt(9);
+                Integer trangThai = rs.getInt(10);
+                String anh = rs.getString(11);
+
+                ChiTietQuanAo ctqa = new ChiTietQuanAo(id, idMau, idTL, idKC, idCL, tenQA, maQA, giaBan, soLuong, trangThai, anh);
+
+                listCTQA.add(ctqa);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listCTQA;
+    }
+
 }
