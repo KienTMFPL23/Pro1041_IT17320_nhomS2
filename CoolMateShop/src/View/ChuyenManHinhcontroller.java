@@ -17,6 +17,7 @@ import javax.swing.JPanel;
  * @author BOSS
  */
 public class ChuyenManHinhcontroller {
+
     private JPanel root;
     private String kindSletecd = "";
     private List<DanhMucBean> list = null;
@@ -72,9 +73,7 @@ public class ChuyenManHinhcontroller {
                 case "BanHang":
                     node = new BanHangPanel();
                     break;
-                case "HoaDon":
-                    node= new HoaDonPanel();
-                    break;
+
                 case "DoiTra":
                     node = new DoiTra();
                     break;
@@ -84,8 +83,10 @@ public class ChuyenManHinhcontroller {
                 case "ThongKe":
                     node = new ThongKePanel();
                     break;
-             
-                
+                case "HoaDon":
+                    node = new HoaDonPanel();
+                    break;
+
                 default:
                     break;
             }

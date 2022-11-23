@@ -27,11 +27,12 @@ public class Main extends javax.swing.JFrame {
         lisst.add(new DanhMucBean("TrangChu", jpntrangchu, jlbTrangChu));
         lisst.add(new DanhMucBean("SanPham", jpnSanPham, jlbSanPham));
         lisst.add(new DanhMucBean("KhachHang", jpnKhachHang, jlbKhachHang));
-        lisst.add(new DanhMucBean("HoaDon", jpnHoaDon, jlbHoaDon));
+        lisst.add(new DanhMucBean("HoaDon",jpnHoaDon,jlbHoaDon));
         lisst.add(new DanhMucBean("DoiTra", jpnDoiTra, jlbDoiTra));
         lisst.add(new DanhMucBean("BanHang", jpnBanHang, jlbBanHang));
         lisst.add(new DanhMucBean("NhanVien", jpnNhanVien, jlbNhanVien));
         lisst.add(new DanhMucBean("ThongKe", jpnThongKe, jlbThongKe));
+       
 
         SetIcon();
         controller.setEvent(lisst);
@@ -303,7 +304,10 @@ public class Main extends javax.swing.JFrame {
         jpnBanHang.setLayout(jpnBanHangLayout);
         jpnBanHangLayout.setHorizontalGroup(
             jpnBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jpnBanHangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnBanHangLayout.setVerticalGroup(
             jpnBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
