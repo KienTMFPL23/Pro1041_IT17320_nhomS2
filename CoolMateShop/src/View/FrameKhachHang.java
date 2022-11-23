@@ -13,7 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -55,7 +57,8 @@ public class FrameKhachHang extends javax.swing.JFrame {
         }
     }
 
-    public KhachHang getFormData() throws ParseException {
+    public KhachHang getFormData() {
+        String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
         SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
         String id = lbl_id.getText();
         String ma = txt_ma.getText().trim();
@@ -75,13 +78,14 @@ public class FrameKhachHang extends javax.swing.JFrame {
         } else {
             gioiTinh = "Nữ";
         }
-         if (!rd_nam.isSelected() && !rd_nu.isSelected()) {
+        if (!rd_nam.isSelected() && !rd_nu.isSelected()) {
             JOptionPane.showMessageDialog(this, "vui lòng chọn giới tính");
             return null;
         }
-        if (txt_sdt.getText().matches("/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/")) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số điện thoại");
-            return null;
+        boolean kt = sdtStr.matches(reg);
+        if (kt == false) {
+            JOptionPane.showMessageDialog(this,"Sai định dạng Sdt");
+            return null ;
         }
         int sdt = -1;
         try {
@@ -226,6 +230,12 @@ public class FrameKhachHang extends javax.swing.JFrame {
             }
         });
 
+        txt_timKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_timKiemKeyReleased(evt);
+            }
+        });
+
         btn_load.setText("Load");
         btn_load.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,21 +367,23 @@ public class FrameKhachHang extends javax.swing.JFrame {
 
     private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
         // TODO add your handling code here:
-        try {
-            KhachHang kh = getFormData();
-            if (khService.checkMa(txt_ma.getText().trim()) != null) {
-                JOptionPane.showMessageDialog(this, "Trung ma");
-                return;
-            }
-            if (khService.insert(kh) > -1) {
-                JOptionPane.showMessageDialog(this, "Insert successful");;
-                loadTable();
-                clearForm();
-            }
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi không thêm được");
+
+        KhachHang kh = getFormData();
+        if (kh == null) {
             return;
         }
+        if (khService.checkMa(txt_ma.getText().trim()) != null) {
+            JOptionPane.showMessageDialog(this, "Trung ma");
+            return;
+        }
+        if (khService.insert(kh) > -1) {
+            JOptionPane.showMessageDialog(this, "Insert successful");;
+            loadTable();
+            clearForm();
+        } else {
+            JOptionPane.showMessageDialog(this, "Insert failed");
+        }
+
     }//GEN-LAST:event_btn_newActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
@@ -382,18 +394,15 @@ public class FrameKhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần sửa");
             return;
         }
-        try {
-            KhachHang kh = getFormData();
-            if (kh != null) {
-                this.khService.update(kh, kh.getId());
-                JOptionPane.showMessageDialog(this, "Update successful");
-                loadTable();
-                clearForm();
-            }
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi không sửa được");
-            ex.printStackTrace();
-            return;
+
+        KhachHang kh = getFormData();
+        if (kh != null) {
+            this.khService.update(kh, kh.getId());
+            JOptionPane.showMessageDialog(this, "Update successful");
+            loadTable();
+            clearForm();
+        } else {
+            JOptionPane.showMessageDialog(this, "Update failed");
         }
 
     }//GEN-LAST:event_btn_updateActionPerformed
@@ -431,6 +440,14 @@ public class FrameKhachHang extends javax.swing.JFrame {
         // TODO add your handling code here:
         clearForm();
     }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void txt_timKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_timKiemKeyReleased
+        // TODO add your handling code here:
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(((DefaultTableModel) tb_khachHang.getModel()));
+        sorter.setRowFilter(RowFilter.regexFilter(txt_timKiem.getText()));
+
+        tb_khachHang.setRowSorter(sorter);
+    }//GEN-LAST:event_txt_timKiemKeyReleased
 
     /**
      * @param args the command line arguments
