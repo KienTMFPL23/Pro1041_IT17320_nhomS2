@@ -65,4 +65,9 @@ public class ChiTietQuanAoService implements IChiTietQuanAoService {
         }
     }
 
+    @Override
+    public List<ChiTietQuanAo> getAll() {
+        return chiTietQuanAoRepository.getQuanAo();
+    }
+
 }
