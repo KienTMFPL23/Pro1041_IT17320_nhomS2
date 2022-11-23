@@ -108,6 +108,11 @@ public class users {
         this.vaiTro = vaiTro;
     }
 
+    @Override
+    public String toString() {
+        return  Hoten ;
+    }
+
     
     
 }
