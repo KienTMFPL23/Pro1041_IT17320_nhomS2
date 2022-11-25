@@ -8,12 +8,15 @@ import DomainModel.KhachHang;
 import Service.Impl.KhachHangService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -55,7 +58,8 @@ public class FrameKhachHang extends javax.swing.JFrame {
         }
     }
 
-    public KhachHang getFormData() throws ParseException {
+    public KhachHang getFormData() {
+        String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
         SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
         String id = lbl_id.getText();
         String ma = txt_ma.getText().trim();
@@ -75,12 +79,13 @@ public class FrameKhachHang extends javax.swing.JFrame {
         } else {
             gioiTinh = "Nữ";
         }
-         if (!rd_nam.isSelected() && !rd_nu.isSelected()) {
+        if (!rd_nam.isSelected() && !rd_nu.isSelected()) {
             JOptionPane.showMessageDialog(this, "vui lòng chọn giới tính");
             return null;
         }
-        if (txt_sdt.getText().matches("/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/")) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số điện thoại");
+        boolean kt = sdtStr.matches(reg);
+        if (kt == false) {
+            JOptionPane.showMessageDialog(this, "Sai định dạng sdt");
             return null;
         }
         int sdt = -1;
@@ -106,6 +111,7 @@ public class FrameKhachHang extends javax.swing.JFrame {
         jdc_ngaySinh.setDate(null);
         txt_ma.setText("");
         txt_sdt.setText("");
+        btg.clearSelection();
     }
 
     public void mouclick() {
@@ -131,7 +137,6 @@ public class FrameKhachHang extends javax.swing.JFrame {
 
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String) tb_khachHang.getValueAt(row, 3));
-
             jdc_ngaySinh.setDate(date);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -226,6 +231,12 @@ public class FrameKhachHang extends javax.swing.JFrame {
             }
         });
 
+        txt_timKiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_timKiemKeyReleased(evt);
+            }
+        });
+
         btn_load.setText("Load");
         btn_load.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,11 +263,11 @@ public class FrameKhachHang extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -266,10 +277,10 @@ public class FrameKhachHang extends javax.swing.JFrame {
                                         .addComponent(txt_ten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                                         .addComponent(txt_ma, javax.swing.GroupLayout.Alignment.LEADING)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -357,20 +368,19 @@ public class FrameKhachHang extends javax.swing.JFrame {
 
     private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
         // TODO add your handling code here:
-        try {
-            KhachHang kh = getFormData();
-            if (khService.checkMa(txt_ma.getText().trim()) != null) {
-                JOptionPane.showMessageDialog(this, "Trung ma");
-                return;
-            }
-            if (khService.insert(kh) > -1) {
-                JOptionPane.showMessageDialog(this, "Insert successful");;
-                loadTable();
-                clearForm();
-            }
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi không thêm được");
+
+        KhachHang kh = getFormData();
+        if (kh == null) {
+            return ;
+        }
+        if (khService.checkMa(txt_ma.getText().trim()) != null) {
+            JOptionPane.showMessageDialog(this, "Trung ma");
             return;
+        }
+        if (khService.insert(kh) > -1) {
+            JOptionPane.showMessageDialog(this, "Insert successful");;
+            loadTable();
+            clearForm();
         }
     }//GEN-LAST:event_btn_newActionPerformed
 
@@ -382,19 +392,15 @@ public class FrameKhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần sửa");
             return;
         }
-        try {
-            KhachHang kh = getFormData();
-            if (kh != null) {
-                this.khService.update(kh, kh.getId());
-                JOptionPane.showMessageDialog(this, "Update successful");
-                loadTable();
-                clearForm();
-            }
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi không sửa được");
-            ex.printStackTrace();
-            return;
+
+        KhachHang kh = getFormData();
+        if (kh != null) {
+            this.khService.update(kh, kh.getId());
+            JOptionPane.showMessageDialog(this, "Update successful");
+            loadTable();
+            clearForm();
         }
+
 
     }//GEN-LAST:event_btn_updateActionPerformed
 
@@ -405,21 +411,27 @@ public class FrameKhachHang extends javax.swing.JFrame {
 
     private void btn_findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_findActionPerformed
         // TODO add your handling code here:
-        String hoTenStr = txt_timKiem.getText().toString();
-        DefaultTableModel dtm = (DefaultTableModel) tb_khachHang.getModel();
-        dtm.setRowCount(0);
-        for (KhachHang kh : this.khService.timTheoTen(hoTenStr)) {
-            dtm.addRow(new Object[]{
-                kh.getId(),
-                kh.getMa(),
-                kh.getHoTen(),
-                kh.getGioiTinh(),
-                kh.getNgaySinh(),
-                kh.getSdt(),
-                kh.getDiaChi()
-            });
-        }
-        JOptionPane.showMessageDialog(this, "Tìm kiếm thành công");
+//        String hoTenStr = txt_timKiem.getText().toString();
+//        ArrayList<KhachHang> listTimKiem = this.khService.timTheoTen(hoTenStr);
+//        if (listTimKiem == null) {
+//            JOptionPane.showMessageDialog(this, "Không tìm thấy");
+//            return ;
+//        } else {
+//            DefaultTableModel dtm = (DefaultTableModel) tb_khachHang.getModel();
+//            dtm.setRowCount(0);
+//            for (KhachHang kh : listTimKiem) {
+//                dtm.addRow(new Object[]{
+//                    kh.getId(),
+//                    kh.getMa(),
+//                    kh.getHoTen(),
+//                    kh.getGioiTinh(),
+//                    kh.getNgaySinh(),
+//                    kh.getSdt(),
+//                    kh.getDiaChi()
+//                });
+//            }
+//            JOptionPane.showMessageDialog(this, "Tìm kiếm thành công");
+//        }
     }//GEN-LAST:event_btn_findActionPerformed
 
     private void btn_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loadActionPerformed
@@ -431,6 +443,14 @@ public class FrameKhachHang extends javax.swing.JFrame {
         // TODO add your handling code here:
         clearForm();
     }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void txt_timKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_timKiemKeyReleased
+        // TODO add your handling code here:
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(((DefaultTableModel) tb_khachHang.getModel()));
+        sorter.setRowFilter(RowFilter.regexFilter(txt_timKiem.getText()));
+
+        tb_khachHang.setRowSorter(sorter);
+    }//GEN-LAST:event_txt_timKiemKeyReleased
 
     /**
      * @param args the command line arguments

@@ -127,8 +127,8 @@ public class KhachHangRepository implements IKhachHangRepository {
             Connection conn = DBcontext.getConnection();
             String sql = "select * from khachhang where HoTen = '" + hoTen + "'";
             PreparedStatement ps = conn.prepareStatement(sql);
-
-            ps.executeUpdate();
+            ps.setString(1,hoTen);
+            ps.execute();
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {
                 String id = rs.getString("Id");
