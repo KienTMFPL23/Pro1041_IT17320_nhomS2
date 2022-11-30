@@ -13,6 +13,8 @@ public interface IKhachHangService {
     Integer update(KhachHang kh, String id);
 
     String checkMa(String ma);
+    
+    String findName(String sdt);
 
     ArrayList<KhachHang> timTheoTen(String hoTen);
 }

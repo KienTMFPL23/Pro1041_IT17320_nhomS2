@@ -91,16 +91,16 @@ public class HoaDonReponsitory implements IHoaDonReponsitory {
     public String checkMa(String ma) {
         String maCheck = null;
         try {
-            Connection conn = DBcontext .getConnection();
+            Connection conn = DBcontext.getConnection();
             String sql = "select mahd from hoadon where mahd =?";
-              PreparedStatement ps = conn.prepareStatement(sql);
-              ps.setString(1, ma);
-              ps.execute();
-              ResultSet rs = ps.getResultSet();
-              while(rs.next()){
-                  String Ma = rs.getString("mahd");
-                  maCheck = Ma;
-              }
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ma);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String Ma = rs.getString("mahd");
+                maCheck = Ma;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -110,7 +110,7 @@ public class HoaDonReponsitory implements IHoaDonReponsitory {
     @Override
     public ArrayList<HoaDon> selectList() {
         ArrayList<HoaDon> list = new ArrayList<>();
-          try {
+        try {
             Connection conn = DBcontext.getConnection();
             String sql = "select * from hoadon";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -124,13 +124,90 @@ public class HoaDonReponsitory implements IHoaDonReponsitory {
                 java.sql.Date ngayTao = rs.getDate("ngaytao");
                 java.sql.Date ngaythanhtoan = rs.getDate("ngaythanhtoan");
                 int trangthai = rs.getInt("TinhTrang");
- HoaDon hd = new HoaDon(id, khachhang, nguoidung, mahd, ngayTao, ngaythanhtoan, trangthai);
+                HoaDon hd = new HoaDon(id, khachhang, nguoidung, mahd, ngayTao, ngaythanhtoan, trangthai);
                 list.add(hd);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public Integer hdCho(HoaDon hd) {
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "insert into hoadon(mahd,ngaytao,tinhtrang) values (?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, hd.getMaHd());
+            ps.setDate(2, new java.sql.Date(hd.getNgayTao().getTime()));
+            ps.setInt(3, hd.getTinhTrang());
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public ArrayList<HoaDonViewModel> getList() {
+        ArrayList<HoaDonViewModel> list = new ArrayList<>();
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "select * from HoaDon where TinhTrang = 0";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String id = rs.getString("Id");
+                String khachhang = rs.getString("IdKH");
+                String nguoidung = rs.getString("IdUser");
+                String mahd = rs.getString("mahd");
+                java.sql.Date ngayTao = rs.getDate("ngaytao");
+                java.sql.Date ngaythanhtoan = rs.getDate("ngaythanhtoan");
+                int trangthai = rs.getInt("TinhTrang");
+                HoaDonViewModel hd = new HoaDonViewModel(id, khachhang, nguoidung, mahd, ngayTao, ngaythanhtoan, trangthai);
+                list.add(hd);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public Integer updateTrangThai(String ma, int trangThai) {
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "update hoadon set tinhtrang=? where mahd = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, trangThai);
+            ps.setString(2, ma);
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public Integer updateHoaDon(HoaDon hd, String id) {
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "update hoadon set idkh = ? , iduser=?,ngaythanhtoan=? ,tinhtrang=? where Id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, hd.getIdKH());
+            ps.setString(2, hd.getIdUser());
+
+            ps.setDate(3, new java.sql.Date(hd.getNgayThanhToan().getTime()));
+            ps.setInt(4, hd.getTinhTrang());
+            ps.setString(5, id);
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
 }

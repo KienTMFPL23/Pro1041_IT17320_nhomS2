@@ -13,6 +13,8 @@ public interface IKhachHangRepository {
     Integer update(KhachHang kh, String id);
 
     String findMa(String ma);
+    
+    String findName(String sdt);
 
     ArrayList<KhachHang> timTheoTen(String hoTen);
 }

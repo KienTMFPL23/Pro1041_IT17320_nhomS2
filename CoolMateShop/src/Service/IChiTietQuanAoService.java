@@ -15,16 +15,20 @@ import java.util.List;
 public interface IChiTietQuanAoService {
 
     List<ChiTietQuanAoRespone> getAllCTQA();
-    
+
     List<ChiTietQuanAo> getAll();
 
     Integer insert(ChiTietQuanAo ctqa);
 
     Integer update(ChiTietQuanAo ctqa, String ma);
 
+    Integer updateSoLuong(String id, int soLuong);
+
+    Integer getSLTon(String id);
+
     Integer delete(String ma);
 
     List<ChiTietQuanAoRespone> searchByMa(String ma);
-    
+
     String checkMa(String ma);
 }

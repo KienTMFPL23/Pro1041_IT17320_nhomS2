@@ -37,4 +37,32 @@ public class ChiTietHoaDonService implements IChiTietHoaDonService {
         }
     }
 
+    @Override
+    public List<ChiTietHoaDonRespone> getAllByMa(String ma) {
+        return cthdRepo.getAllByMa(ma);
+    }
+
+    @Override
+    public List<ChiTietHoaDonRespone> getListHD(String id) {
+        return cthdRepo.getAllHD(id);
+    }
+
+    @Override
+    public Integer delete(String id) {
+        try {
+            return cthdRepo.delete(id);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public Integer updateSLuong(String id, int soLuong) {
+        try {
+            return cthdRepo.update(id, soLuong);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
 }

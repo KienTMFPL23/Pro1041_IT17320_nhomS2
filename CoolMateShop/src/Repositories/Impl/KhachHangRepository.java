@@ -149,4 +149,28 @@ public class KhachHangRepository implements IKhachHangRepository {
         return list;
     }
 
+    @Override
+    public String findName(String sdt) {
+        String name = null;
+        try {
+            Connection conn = DBcontext.getConnection();
+
+            String sql = "Select HoTen from KhachHang where Sdt = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, sdt);
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String hoten = rs.getString("HoTen");
+
+                name = hoten;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return name;
+    }
+
 }

@@ -56,4 +56,36 @@ public class HoaDonService implements IHoaDonService {
         return this.hdr.selectList();
     }
 
+    @Override
+    public Integer hdCho(HoaDon hd) {
+        try {
+            return hdr.hdCho(hd);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public ArrayList<HoaDonViewModel> getAll() {
+        return hdr.getList();
+    }
+
+    @Override
+    public Integer updateTT(String ma, int tt) {
+        try {
+            return hdr.updateTrangThai(ma, tt);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public Integer updateHoaDon(HoaDon hd, String id) {
+        try {
+            return hdr.updateHoaDon(hd, id);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
 }
