@@ -53,7 +53,7 @@ public class ChiTietQuanAoService implements IChiTietQuanAoService {
 
     @Override
     public List<ChiTietQuanAoRespone> searchByMa(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return chiTietQuanAoRepository.getListByMa(ma);
     }
 
     @Override
@@ -68,6 +68,24 @@ public class ChiTietQuanAoService implements IChiTietQuanAoService {
     @Override
     public List<ChiTietQuanAo> getAll() {
         return chiTietQuanAoRepository.getQuanAo();
+    }
+
+    @Override
+    public Integer updateSoLuong(String id, int soLuong) {
+        try {
+            return chiTietQuanAoRepository.updateSoLuong(id, soLuong);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public Integer getSLTon(String id) {
+        try {
+            return chiTietQuanAoRepository.getSoLuong(id);
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
 }

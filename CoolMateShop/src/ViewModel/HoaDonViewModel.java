@@ -11,7 +11,8 @@ import java.util.Date;
  * @author BOSS
  */
 public class HoaDonViewModel {
- 
+
+    private String id;
     private String khachHang;
     private String users;
     private String maHD;
@@ -19,8 +20,8 @@ public class HoaDonViewModel {
     private Date ngayThanhToan;
     private int tinhTrang;
 
-    public HoaDonViewModel( String khachHang, String users, String maHD, Date ngayTao, Date ngayThanhToan, int tinhTrang) {
-       
+    public HoaDonViewModel(String khachHang, String users, String maHD, Date ngayTao, Date ngayThanhToan, int tinhTrang) {
+
         this.khachHang = khachHang;
         this.users = users;
         this.maHD = maHD;
@@ -29,10 +30,26 @@ public class HoaDonViewModel {
         this.tinhTrang = tinhTrang;
     }
 
-    public HoaDonViewModel() {
+    public HoaDonViewModel(String id, String khachHang, String users, String maHD, Date ngayTao, Date ngayThanhToan, int tinhTrang) {
+        this.id = id;
+        this.khachHang = khachHang;
+        this.users = users;
+        this.maHD = maHD;
+        this.ngayTao = ngayTao;
+        this.ngayThanhToan = ngayThanhToan;
+        this.tinhTrang = tinhTrang;
     }
 
-   
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public HoaDonViewModel() {
+    }
 
     public String getKhachHang() {
         return khachHang;
@@ -81,8 +98,5 @@ public class HoaDonViewModel {
     public void setTinhTrang(int tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
- 
 
-   
-             
 }

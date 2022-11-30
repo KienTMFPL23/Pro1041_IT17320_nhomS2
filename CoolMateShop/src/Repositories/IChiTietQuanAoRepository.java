@@ -15,14 +15,21 @@ import java.util.List;
 public interface IChiTietQuanAoRepository {
 
     List<ChiTietQuanAoRespone> getAll();
-    
+
+    List<ChiTietQuanAoRespone> getListByMa(String ma);
+
     List<ChiTietQuanAo> getQuanAo();
 
     Integer insert(ChiTietQuanAo ctqa);
 
     Integer update(ChiTietQuanAo ctqa, String ma);
 
+    Integer updateSoLuong(String id, int soLuong);
+
+    Integer getSoLuong(String id);
+
     Integer delete(String ma);
-    
+
     String checkMa(String ma);
+
 }

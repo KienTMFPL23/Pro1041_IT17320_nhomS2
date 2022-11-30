@@ -13,9 +13,22 @@ import java.util.ArrayList;
  * @author BOSS
  */
 public interface IHoaDonService {
+
     ArrayList<HoaDonViewModel> getlist();
+
+    ArrayList<HoaDonViewModel> getAll();
+
     Integer them(HoaDon hd);
-      Integer sua(String ma,HoaDon hd);
-      String checkMa(String ma);
-       ArrayList<HoaDon> selectList();
+
+    Integer sua(String ma, HoaDon hd);
+
+    String checkMa(String ma);
+
+    ArrayList<HoaDon> selectList();
+
+    Integer hdCho(HoaDon hd);
+
+    Integer updateTT(String ma, int trangThai);
+    
+    Integer updateHoaDon(HoaDon hd, String id);
 }

@@ -16,5 +16,13 @@ public interface IChiTietHoaDonService {
 
     List<ChiTietHoaDonRespone> getAll();
 
+    List<ChiTietHoaDonRespone> getAllByMa(String ma);
+
+    List<ChiTietHoaDonRespone> getListHD(String id);
+
     Integer insert(ChiTietHoaDon cthd);
+
+    Integer updateSLuong(String id, int soLuong);
+
+    Integer delete(String id);
 }

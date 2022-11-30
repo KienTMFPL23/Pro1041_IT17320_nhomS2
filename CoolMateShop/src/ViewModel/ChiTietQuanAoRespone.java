@@ -10,6 +10,7 @@ package ViewModel;
  */
 public class ChiTietQuanAoRespone {
 
+    private String id;
     private String maSP;
     private String tenSP;
     private String loaiSP;
@@ -24,6 +25,20 @@ public class ChiTietQuanAoRespone {
     public ChiTietQuanAoRespone() {
     }
 
+    public ChiTietQuanAoRespone(String id, String maSP, String tenSP, String loaiSP, String kichCo, String mauSac, String chatLieu, Float giaTien, Integer soLuong, Integer trangThai, String hinhAnh) {
+        this.id = id;
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.loaiSP = loaiSP;
+        this.kichCo = kichCo;
+        this.mauSac = mauSac;
+        this.chatLieu = chatLieu;
+        this.giaTien = giaTien;
+        this.soLuong = soLuong;
+        this.trangThai = trangThai;
+        this.hinhAnh = hinhAnh;
+    }
+
     public ChiTietQuanAoRespone(String maSP, String tenSP, String loaiSP, String kichCo, String mauSac, String chatLieu, Float giaTien, Integer soLuong, Integer trangThai, String hinhAnh) {
         this.maSP = maSP;
         this.tenSP = tenSP;
@@ -35,6 +50,14 @@ public class ChiTietQuanAoRespone {
         this.soLuong = soLuong;
         this.trangThai = trangThai;
         this.hinhAnh = hinhAnh;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getMaSP() {

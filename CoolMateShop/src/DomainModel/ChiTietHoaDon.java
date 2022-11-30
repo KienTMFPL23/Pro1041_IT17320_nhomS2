@@ -29,6 +29,13 @@ public class ChiTietHoaDon {
         this.donGia = donGia;
     }
 
+    public ChiTietHoaDon(String idHD, String idChiTietQA, int soLuong, float donGia) {
+        this.idHD = idHD;
+        this.idChiTietQA = idChiTietQA;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+    }
+
     public String getId() {
         return id;
     }

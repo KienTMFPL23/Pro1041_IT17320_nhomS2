@@ -51,4 +51,13 @@ public class KhachHangService implements IKhachHangService {
         return this.khRepo.timTheoTen(hoTen);
     }
 
+    @Override
+    public String findName(String sdt) {
+        try {
+            return khRepo.findName(sdt);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

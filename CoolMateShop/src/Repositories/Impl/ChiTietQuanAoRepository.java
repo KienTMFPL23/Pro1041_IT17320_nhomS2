@@ -50,6 +50,7 @@ public class ChiTietQuanAoRepository implements IChiTietQuanAoRepository {
                 String hinhAnh = rs.getString("HinhAnh");
 
                 ChiTietQuanAoRespone ctqar = new ChiTietQuanAoRespone();
+                ctqar.setId(id);
                 ctqar.setMaSP(ma);
                 ctqar.setTenSP(ten);
                 ctqar.setLoaiSP(theLoai);
@@ -179,6 +180,93 @@ public class ChiTietQuanAoRepository implements IChiTietQuanAoRepository {
             ex.printStackTrace();
         }
         return listCTQA;
+    }
+
+    @Override
+    public List<ChiTietQuanAoRespone> getListByMa(String ma) {
+        List<ChiTietQuanAoRespone> listCTQA = new ArrayList<>();
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "select ctqa.Id, ctqa.MaQuanAo , ctqa.TenQuanAo,tl.TenTL,kc.Size,ms.TenMau,cl.Ten as 'TenCL',ctqa.GiaBan,ctqa.SoLuong,ctqa.HinhAnh "
+                    + "from ChiTietQuanAo ctqa join MauSac ms on ctqa.IdMau = ms.Id\n"
+                    + "			join ChatLieu cl on ctqa.IdChatLieu = cl.Id\n"
+                    + "			join TheLoai tl on ctqa.IdTheLoai = tl.Id\n"
+                    + "			join KichCo kc on ctqa.IdKichCo = kc.Id  where ctqa.MaQuanAo = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ma);
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String id = rs.getString("Id");
+                String maqa = rs.getString("MaQuanAo");
+                String ten = rs.getString("TenQuanAo");
+                String theLoai = rs.getString("TenTL");
+                String kichCo = rs.getString("Size");
+                String mau = rs.getString("TenMau");
+                String chatLieu = rs.getString("TenCL");
+                Float giaBan = rs.getFloat("GiaBan");
+                Integer soLuong = rs.getInt("SoLuong");
+                String hinhAnh = rs.getString("HinhAnh");
+
+                ChiTietQuanAoRespone ctqar = new ChiTietQuanAoRespone();
+                ctqar.setMaSP(maqa);
+                ctqar.setTenSP(ten);
+                ctqar.setLoaiSP(theLoai);
+                ctqar.setKichCo(kichCo);
+                ctqar.setMauSac(mau);
+                ctqar.setChatLieu(chatLieu);
+                ctqar.setGiaTien(giaBan);
+                ctqar.setSoLuong(soLuong);
+                ctqar.setHinhAnh(hinhAnh);
+
+                listCTQA.add(ctqar);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listCTQA;
+    }
+
+    @Override
+    public Integer updateSoLuong(String id, int soLuong) {
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "UPDATE ChiTietQuanAo SET  SoLuong = ? WHERE id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, soLuong);
+            ps.setString(2, id);
+
+            return ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public Integer getSoLuong(String id) {
+        int soLuong = 0;
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "select SoLuong from ChiTietQuanAo where Id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, id);
+
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                int slton = rs.getInt("SoLuong");
+                soLuong = slton;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return soLuong;
     }
 
 }

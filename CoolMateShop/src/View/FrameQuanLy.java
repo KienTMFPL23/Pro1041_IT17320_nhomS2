@@ -304,7 +304,12 @@ public class FrameQuanLy extends javax.swing.JFrame {
 
         jLabel11.setText("Hình ảnh");
 
-        lblImage.setText("image");
+        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblImage.setBackground(new java.awt.Color(255, 0, 0));
+        lblImage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblImage.setForeground(new java.awt.Color(255, 51, 0));
+        lblImage.setText("UPLOAD IMAGES");
         lblImage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblImageMouseClicked(evt);
@@ -322,10 +327,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(lblImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -425,7 +427,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Loại sản phẩm", "Kích cỡ", "Màu sắc", "Chất liệu", "Giá Bán", "Số lượng", "Tình trạng", "Hình ảnh"
+                "Mã sản phẩm", "Tên sản phẩm", "Loại sản phẩm", "Kích cỡ", "Màu sắc", "Chất liệu", "Giá Bán", "Số lượng", "Tình trạng"
             }
         ));
         tbChiTietQuanAo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -889,7 +891,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
         cbChatLieu.setSelectedItem(cl);
         txtGiaBan.setText(tbChiTietQuanAo.getValueAt(row, 6).toString());
         txtSoLuong.setText(tbChiTietQuanAo.getValueAt(row, 7).toString());
-        String icon = tbChiTietQuanAo.getValueAt(row, 9).toString();
+        String icon = chiTietQuanAoService.getAllCTQA().get(row).getHinhAnh();
         
         lblImage.setIcon(new ImageIcon(icon));
         lblImage.setText("");
@@ -901,7 +903,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
         txtTenSP.setText("");
         txtGiaBan.setText("");
         txtSoLuong.setText("");
-        lblImage.setText("image");
+        lblImage.setText("");
         cbChatLieu.setSelectedIndex(0);
         cbMauSac.setSelectedIndex(0);
         cbLoaiSP.setSelectedIndex(0);

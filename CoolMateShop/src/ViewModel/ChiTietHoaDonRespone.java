@@ -10,7 +10,11 @@ package ViewModel;
  */
 public class ChiTietHoaDonRespone {
 
+    private String id;
+    private String idHD;
+    private String idCTQA;
     private String mahd;
+    private String maQuanAo;
     private String tenQuanAO;
     private int soLuong;
     private float donGia;
@@ -18,11 +22,71 @@ public class ChiTietHoaDonRespone {
     public ChiTietHoaDonRespone() {
     }
 
+    public ChiTietHoaDonRespone(String id, String idCTQA, String mahd, String maQuanAo, String tenQuanAO, int soLuong, float donGia) {
+        this.id = id;
+        this.idCTQA = idCTQA;
+        this.mahd = mahd;
+        this.maQuanAo = maQuanAo;
+        this.tenQuanAO = tenQuanAO;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+    }
+
     public ChiTietHoaDonRespone(String mahd, String tenQuanAO, int soLuong, float donGia) {
         this.mahd = mahd;
         this.tenQuanAO = tenQuanAO;
         this.soLuong = soLuong;
         this.donGia = donGia;
+    }
+
+    public ChiTietHoaDonRespone(String mahd, String maQuanAo, String tenQuanAO, int soLuong, float donGia) {
+        this.mahd = mahd;
+        this.maQuanAo = maQuanAo;
+        this.tenQuanAO = tenQuanAO;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+
+    }
+
+    public ChiTietHoaDonRespone(String idCTQA, String mahd, String maQuanAo, String tenQuanAO, int soLuong, float donGia) {
+        this.idCTQA = idCTQA;
+        this.mahd = mahd;
+        this.maQuanAo = maQuanAo;
+        this.tenQuanAO = tenQuanAO;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIdCTQA() {
+        return idCTQA;
+    }
+
+    public void setIdCTQA(String idCTQA) {
+        this.idCTQA = idCTQA;
+    }
+
+    public String getIdHD() {
+        return idHD;
+    }
+
+    public void setIdHD(String idHD) {
+        this.idHD = idHD;
+    }
+
+    public String getMaQuanAo() {
+        return maQuanAo;
+    }
+
+    public void setMaQuanAo(String maQuanAo) {
+        this.maQuanAo = maQuanAo;
     }
 
     public String getMahd() {
@@ -55,6 +119,10 @@ public class ChiTietHoaDonRespone {
 
     public void setDonGia(float donGia) {
         this.donGia = donGia;
+    }
+
+    public float thanhTien(int soLuong, float donGia) {
+        return soLuong * donGia;
     }
 
 }

@@ -11,9 +11,10 @@ import java.util.Date;
  * @author BOSS
  */
 public class HoaDon {
-    private String id ;
+
+    private String id;
     private String idKH;
-    private String idUser ;
+    private String idUser;
     private String maHd;
     private Date NgayTao;
     private Date NgayThanhToan;
@@ -25,6 +26,13 @@ public class HoaDon {
         this.idUser = idUser;
         this.maHd = maHd;
         this.NgayTao = NgayTao;
+        this.NgayThanhToan = NgayThanhToan;
+        this.tinhTrang = tinhTrang;
+    }
+
+    public HoaDon(String idKH, String idUser, Date NgayThanhToan, int tinhTrang) {
+        this.idKH = idKH;
+        this.idUser = idUser;
         this.NgayThanhToan = NgayThanhToan;
         this.tinhTrang = tinhTrang;
     }
@@ -87,8 +95,5 @@ public class HoaDon {
     public void setTinhTrang(int tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
-    
 
-    
-            
 }
