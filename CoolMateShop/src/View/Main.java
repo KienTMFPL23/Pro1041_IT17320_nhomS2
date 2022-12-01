@@ -96,7 +96,6 @@ public class Main extends javax.swing.JFrame {
         jpnView = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
 
         jpnLayout.setBackground(new java.awt.Color(204, 255, 255));

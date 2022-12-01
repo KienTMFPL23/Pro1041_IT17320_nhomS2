@@ -20,8 +20,9 @@ public class users {
     private String DiaChi;
     private String email;
     private int vaiTro;
+    private String MatKhau;
 
-    public users(String id, String ma, String Hoten, Date ngaysinh, String gioiTinh, String sdt, String DiaChi, String email, int vaiTro) {
+    public users(String id, String ma, String Hoten, Date ngaysinh, String gioiTinh, String sdt, String DiaChi, String email, int vaiTro, String MatKhau) {
         this.id = id;
         this.ma = ma;
         this.Hoten = Hoten;
@@ -31,6 +32,7 @@ public class users {
         this.DiaChi = DiaChi;
         this.email = email;
         this.vaiTro = vaiTro;
+        this.MatKhau = MatKhau;
     }
 
     public users() {
@@ -108,11 +110,18 @@ public class users {
         this.vaiTro = vaiTro;
     }
 
+    public String getMatKhau() {
+        return MatKhau;
+    }
+
+    public void setMatKhau(String MatKhau) {
+        this.MatKhau = MatKhau;
+    }
+
     @Override
     public String toString() {
         return  Hoten ;
     }
 
-    
-    
+   
 }

@@ -38,7 +38,8 @@ public class UsersReponsitory implements IUsersReponsitory {
                 String diachi = rs.getString("diaChi");
                 String email = rs.getString("email");
                 int vaitro = rs.getInt("VaiTro");
-                users use = new users(idStr, maStr, hoTenStr, ngaysinh, gioiTinh, sdt, diachi, email, vaitro);
+                String matKhau = rs.getString("matkhau");
+                users use = new users(idStr, maStr, hoTenStr, ngaysinh, gioiTinh, sdt, diachi, email, vaitro,matKhau);
                 list.add(use);
 
             }
