@@ -28,7 +28,7 @@ public class Main extends javax.swing.JFrame {
         lisst.add(new DanhMucBean("SanPham", jpnSanPham, jlbSanPham));
         lisst.add(new DanhMucBean("KhachHang", jpnKhachHang, jlbKhachHang));
         lisst.add(new DanhMucBean("HoaDon",jpnHoaDon,jlbHoaDon));
-        lisst.add(new DanhMucBean("DoiTra", jpnDoiTra, jlbDoiTra));
+//        lisst.add(new DanhMucBean("DoiTra", jpnDoiTra, jlbDoiTra));
         lisst.add(new DanhMucBean("BanHang", jpnBanHang, jlbBanHang));
         lisst.add(new DanhMucBean("NhanVien", jpnNhanVien, jlbNhanVien));
         lisst.add(new DanhMucBean("ThongKe", jpnThongKe, jlbThongKe));
@@ -50,7 +50,7 @@ public class Main extends javax.swing.JFrame {
         Icon icon4 = new ImageIcon("img/KhachHang.png");
         jlbKhachHang.setIcon(icon4);
         Icon icon6 = new ImageIcon("img/DoiTra.png");
-        jlbDoiTra.setIcon(icon6);
+//        jlbDoiTra.setIcon(icon6);
         Icon icon7 = new ImageIcon("img/KhachHang.png");
         jlbKhachHang.setIcon(icon7);
         Icon icon5 = new ImageIcon("img/NhanVien.png");
@@ -75,6 +75,7 @@ public class Main extends javax.swing.JFrame {
         lb_logo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnThoat = new javax.swing.JButton();
         jpnMenu = new javax.swing.JPanel();
         jpntrangchu = new javax.swing.JPanel();
         jlbTrangChu = new javax.swing.JLabel();
@@ -88,11 +89,8 @@ public class Main extends javax.swing.JFrame {
         jlbNhanVien = new javax.swing.JLabel();
         jpnThongKe = new javax.swing.JPanel();
         jlbThongKe = new javax.swing.JLabel();
-        btnThoat = new javax.swing.JButton();
         jpnBanHang = new javax.swing.JPanel();
         jlbBanHang = new javax.swing.JLabel();
-        jpnDoiTra = new javax.swing.JPanel();
-        jlbDoiTra = new javax.swing.JLabel();
         jpnView = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,12 +112,19 @@ public class Main extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("-     Thời trang và hơn thế nữa     -");
 
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnthanhTabLayout = new javax.swing.GroupLayout(jpnthanhTab);
         jpnthanhTab.setLayout(jpnthanhTabLayout);
         jpnthanhTabLayout.setHorizontalGroup(
             jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnthanhTabLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(409, Short.MAX_VALUE)
                 .addGroup(jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnthanhTabLayout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -129,13 +134,17 @@ public class Main extends javax.swing.JFrame {
                         .addGap(370, 370, 370))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnthanhTabLayout.createSequentialGroup()
                         .addComponent(lb_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(349, 349, 349))))
+                        .addGap(268, 268, 268)
+                        .addComponent(btnThoat)
+                        .addContainerGap())))
         );
         jpnthanhTabLayout.setVerticalGroup(
             jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnthanhTabLayout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(lb_logo)
+                .addGroup(jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_logo)
+                    .addComponent(btnThoat))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(42, 42, 42)
@@ -282,17 +291,6 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnThoat.setBackground(new java.awt.Color(204, 255, 255));
-        btnThoat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThoat.setForeground(new java.awt.Color(0, 102, 102));
-        btnThoat.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnThoat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThoatActionPerformed(evt);
-            }
-        });
-
         jpnBanHang.setBackground(new java.awt.Color(204, 255, 255));
 
         jlbBanHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -313,29 +311,6 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jlbBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
         );
 
-        jpnDoiTra.setBackground(new java.awt.Color(204, 255, 255));
-
-        jlbDoiTra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jlbDoiTra.setForeground(new java.awt.Color(0, 102, 102));
-        jlbDoiTra.setText("Đổi Trả");
-
-        javax.swing.GroupLayout jpnDoiTraLayout = new javax.swing.GroupLayout(jpnDoiTra);
-        jpnDoiTra.setLayout(jpnDoiTraLayout);
-        jpnDoiTraLayout.setHorizontalGroup(
-            jpnDoiTraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnDoiTraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlbDoiTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jpnDoiTraLayout.setVerticalGroup(
-            jpnDoiTraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnDoiTraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlbDoiTra, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout jpnMenuLayout = new javax.swing.GroupLayout(jpnMenu);
         jpnMenu.setLayout(jpnMenuLayout);
         jpnMenuLayout.setHorizontalGroup(
@@ -344,9 +319,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jpnSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpnKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnThoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpnDoiTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpnNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpnBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -360,17 +333,13 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jpnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jpnDoiTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(jpnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(117, 117, 117))
         );
 
         javax.swing.GroupLayout jpnViewLayout = new javax.swing.GroupLayout(jpnView);
@@ -464,7 +433,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jlbBanHang;
-    private javax.swing.JLabel jlbDoiTra;
     private javax.swing.JLabel jlbHoaDon;
     private javax.swing.JLabel jlbKhachHang;
     private javax.swing.JLabel jlbNhanVien;
@@ -472,7 +440,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jlbThongKe;
     private javax.swing.JLabel jlbTrangChu;
     private javax.swing.JPanel jpnBanHang;
-    private javax.swing.JPanel jpnDoiTra;
     private javax.swing.JPanel jpnHoaDon;
     private javax.swing.JPanel jpnKhachHang;
     private javax.swing.JPanel jpnLayout;
