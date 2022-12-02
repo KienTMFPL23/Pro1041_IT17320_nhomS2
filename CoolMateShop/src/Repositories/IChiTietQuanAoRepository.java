@@ -24,9 +24,9 @@ public interface IChiTietQuanAoRepository {
 
     Integer update(ChiTietQuanAo ctqa, String ma);
 
-    Integer updateSoLuong(String id, int soLuong);
+    Integer updateSoLuong(String ma, int soLuong);
 
-    Integer getSoLuong(String id);
+    Integer getSoLuong(String ma);
 
     Integer delete(String ma);
 

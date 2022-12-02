@@ -24,5 +24,7 @@ public interface IChiTietHoaDonService {
 
     Integer updateSLuong(String id, int soLuong);
 
+    Integer getSlMua(String id);
+
     Integer delete(String id);
 }

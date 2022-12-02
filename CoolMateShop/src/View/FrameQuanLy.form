@@ -190,7 +190,7 @@
                                           <Component id="cbChatLieu" max="32767" attributes="0"/>
                                           <Component id="jPanel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="72" max="32767" attributes="0"/>
+                                      <EmptySpace pref="82" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -656,7 +656,7 @@
                                               <Component id="rdTheLoai" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                               <Component id="rdChatLieu" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="118" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="128" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -857,28 +857,6 @@
               </SubComponents>
             </Container>
           </SubComponents>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jPanel6">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Kh&#xe1;ch h&#xe0;ng">
-                <Property name="tabTitle" type="java.lang.String" value="Kh&#xe1;ch h&#xe0;ng"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="948" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="792" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
         </Container>
       </SubComponents>
     </Container>
