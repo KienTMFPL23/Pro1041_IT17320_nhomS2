@@ -64,7 +64,7 @@ public class TheLoaiReponsitory implements ITheLoaiReponsitory {
         String checkMa = null;
         try {
             Connection conn = DBcontext.getConnection();
-            String sql = "select matl from chatlieu where matl = ?";
+            String sql = "select matl from TheLoai where matl = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ma);
             ps.execute();

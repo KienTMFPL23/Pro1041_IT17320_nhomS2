@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  *
@@ -68,13 +69,18 @@ public class ChuyenManHinhcontroller {
                     node = new TrangChuPanel();
                     break;
                 case "SanPham":
-                    node = new SanPhamPanel();
+                    FrameQuanLy ql = new FrameQuanLy();
+                    ql.setVisible(true);
+                  ql.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                     break;
                 case "KhachHang":
                     nodde = new FrameKhachHang();
                     break;
                 case "BanHang":
-                    node = new BanHangPanel();
+//                    node = new BanHangPanel();
+                    FrameBanHang bh = new FrameBanHang();
+                    bh.setVisible(true);
+                    bh.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                     break;
 
                 case "DoiTra":

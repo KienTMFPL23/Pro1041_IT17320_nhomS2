@@ -4,16 +4,110 @@
  */
 
 package View;
+import DomainModel.KhachHang;
+import Service.Impl.KhachHangService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author BOSS
  */
 public class KhachHangPanel extends javax.swing.JPanel {
-
+ private KhachHangService khService;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private int index = 1;
+    private ButtonGroup btg;
     /** Creates new form KhachHangPanel */
     public KhachHangPanel() {
         initComponents();
+          khService = new KhachHangService();
+        rdGioiTinh();
+        loadTable();
+       
+    }
+     public void rdGioiTinh() {
+        btg = new ButtonGroup();
+        btg.add(RbNu);
+        btg.add(rbNam);
+    }
+
+    public void loadTable() {
+        DefaultTableModel dtm = (DefaultTableModel) this.tb_Khachhang.getModel();
+        dtm.setRowCount(0);
+        for (KhachHang kh : this.khService.getList()) {
+            Object[] rowData = {
+//                kh.getId(),
+                kh.getMa(),
+                kh.getHoTen(),
+                sdf.format(kh.getNgaySinh()),
+                kh.getGioiTinh(),
+                kh.getSdt(),
+                kh.getDiaChi(),};
+            dtm.addRow(rowData);
+        }
+    }
+
+    public KhachHang getFormData() {
+        String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
+        String id ="";
+        String ma = txt_ma.getText().trim();
+        String ten = txt_ten.getText().trim();
+        Date ngaySinh = this.ngaySinh.getDate();
+        String sdtStr = txt_Sdt.getText().trim();
+        String diaChi = txtDiaChi.getText().trim();
+
+        if (ma.length() == 0 || ten.length() == 0
+                || sdtStr.length() == 0 || diaChi.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đủ các thông tin");
+            return null;
+        }
+        String gioiTinh = "";
+        if (rbNam.isSelected()) {
+            gioiTinh = "Nam";
+        } else {
+            gioiTinh = "Nữ";
+        }
+        if (!rbNam.isSelected() && !RbNu.isSelected()) {
+            JOptionPane.showMessageDialog(this, "vui lòng chọn giới tính");
+            return null;
+        }
+        boolean kt = sdtStr.matches(reg);
+        if (kt == false) {
+            JOptionPane.showMessageDialog(this,"Sai định dạng Sdt");
+            return null ;
+        }
+        int sdt = -1;
+        try {
+            sdt = Integer.parseInt(txt_Sdt.getText().trim());
+
+            if (sdt < 0) {
+                JOptionPane.showMessageDialog(this, "Số điện thoai phải là số dương");
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Số điện thoai phải là số");
+            return null;
+        }
+        KhachHang kh = new KhachHang(id, ma, ten, ngaySinh, gioiTinh, sdtStr, diaChi);
+        return kh;
+    }
+     public void clearForm() {
+        
+        txt_ten.setText("");
+        txtDiaChi.setText("");
+        ngaySinh.setDate(null);
+        txt_ma.setText("");
+        txt_Sdt.setText("");
     }
 
     /** This method is called from within the constructor to
@@ -25,20 +119,312 @@ public class KhachHangPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jpnLayout = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txt_ma = new javax.swing.JTextField();
+        txt_ten = new javax.swing.JTextField();
+        txt_Sdt = new javax.swing.JTextField();
+        txtDiaChi = new javax.swing.JTextField();
+        rbNam = new javax.swing.JRadioButton();
+        RbNu = new javax.swing.JRadioButton();
+        ngaySinh = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tb_Khachhang = new javax.swing.JTable();
+        btn_them = new javax.swing.JButton();
+        btn_sua = new javax.swing.JButton();
+        txt_timkiem = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+
+        jLabel1.setText("Tên Khách Hàng : ");
+
+        jLabel2.setText("Mã : ");
+
+        jLabel3.setText("Ngày Sinh : ");
+
+        jLabel4.setText("Giới tính : ");
+
+        jLabel5.setText("SĐT : ");
+
+        jLabel6.setText("Địa Chỉ :");
+
+        rbNam.setText("Nam");
+
+        RbNu.setText("Nữ");
+
+        tb_Khachhang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã", "Tên Khách hàng", "Ngày sinh", "Giới tính", "SĐT", "Địa Chỉ"
+            }
+        ));
+        tb_Khachhang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_KhachhangMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tb_Khachhang);
+
+        btn_them.setText("Thêm");
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
+
+        btn_sua.setText("Sửa");
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
+
+        txt_timkiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_timkiemKeyReleased(evt);
+            }
+        });
+
+        jLabel7.setText("Tìm Kiếm");
+
+        javax.swing.GroupLayout jpnLayoutLayout = new javax.swing.GroupLayout(jpnLayout);
+        jpnLayout.setLayout(jpnLayoutLayout);
+        jpnLayoutLayout.setHorizontalGroup(
+            jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnLayoutLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(jpnLayoutLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpnLayoutLayout.createSequentialGroup()
+                        .addComponent(btn_them)
+                        .addGap(48, 48, 48)
+                        .addComponent(btn_sua)
+                        .addGap(133, 133, 133))
+                    .addGroup(jpnLayoutLayout.createSequentialGroup()
+                        .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(1, 1, 1)
+                        .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpnLayoutLayout.createSequentialGroup()
+                                .addComponent(rbNam)
+                                .addGap(30, 30, 30)
+                                .addComponent(RbNu))
+                            .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_ten)
+                                .addComponent(txt_Sdt)
+                                .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
+                            .addComponent(ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(61, 61, 61)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(103, Short.MAX_VALUE))
+        );
+        jpnLayoutLayout.setVerticalGroup(
+            jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnLayoutLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(28, 28, 28)
+                .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_ten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(ngaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(rbNam)
+                    .addComponent(RbNu))
+                .addGap(20, 20, 20)
+                .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_Sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_them)
+                    .addComponent(btn_sua)
+                    .addComponent(jLabel7)
+                    .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jpnLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpnLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(19, 19, 19))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+         KhachHang kh = getFormData();
+        if (kh == null) {
+            return;
+        }
+        if (khService.checkMa(txt_ma.getText().trim()) != null) {
+            JOptionPane.showMessageDialog(this, "Trung ma");
+            return;
+        }
+        if (khService.insert(kh) > -1) {
+            JOptionPane.showMessageDialog(this, "Insert successful");;
+            loadTable();
+            clearForm();
+        } else {
+            JOptionPane.showMessageDialog(this, "Insert failed");
+        }
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        // TODO add your handling code here:
+         int row = tb_Khachhang.getSelectedRow();
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần sửa");
+            return;
+        }
+
+        KhachHang kh = getFormData();
+        if (kh != null) {
+            this.khService.update(kh, kh.getId());
+            JOptionPane.showMessageDialog(this, "Update successful");
+            loadTable();
+            clearForm();
+        } else {
+            JOptionPane.showMessageDialog(this, "Update failed");
+        }
+    }//GEN-LAST:event_btn_suaActionPerformed
+
+    private void tb_KhachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_KhachhangMouseClicked
+        // TODO add your handling code here:
+        int row = this.tb_Khachhang.getSelectedRow();
+
+        if (row == -1) {
+            return;
+        }
+
+        String gt = tb_Khachhang.getValueAt(row, 3).toString();
+        if (gt.equalsIgnoreCase("Nam")) {
+            rbNam.setSelected(true);
+        } else {
+            RbNu.setSelected(true);
+        }
+
+      
+        txt_ma.setText((String) tb_Khachhang.getValueAt(row, 0).toString());
+        txt_ten.setText((String) tb_Khachhang.getValueAt(row, 1).toString());
+        txt_Sdt.setText((String) tb_Khachhang.getValueAt(row, 4).toString());
+        txtDiaChi.setText((String) tb_Khachhang.getValueAt(row, 5).toString());
+
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String) tb_Khachhang.getValueAt(row, 2));
+
+            ngaySinh.setDate(date);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_tb_KhachhangMouseClicked
+
+    private void txt_timkiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_timkiemKeyReleased
+        // TODO add your handling code here:
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(((DefaultTableModel) tb_Khachhang.getModel()));
+        sorter.setRowFilter(RowFilter.regexFilter(txt_timkiem.getText()));
+
+        tb_Khachhang.setRowSorter(sorter);
+    }//GEN-LAST:event_txt_timkiemKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton RbNu;
+    private javax.swing.JButton btn_sua;
+    private javax.swing.JButton btn_them;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jpnLayout;
+    private com.toedter.calendar.JDateChooser ngaySinh;
+    private javax.swing.JRadioButton rbNam;
+    private javax.swing.JTable tb_Khachhang;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txt_Sdt;
+    private javax.swing.JTextField txt_ma;
+    private javax.swing.JTextField txt_ten;
+    private javax.swing.JTextField txt_timkiem;
     // End of variables declaration//GEN-END:variables
 
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Main().setVisible(true);
+            }
+        });
+    }
 }
