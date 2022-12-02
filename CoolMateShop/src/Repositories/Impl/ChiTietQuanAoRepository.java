@@ -229,14 +229,14 @@ public class ChiTietQuanAoRepository implements IChiTietQuanAoRepository {
     }
 
     @Override
-    public Integer updateSoLuong(String id, int soLuong) {
+    public Integer updateSoLuong(String ma, int soLuong) {
         try {
             Connection conn = DBcontext.getConnection();
-            String sql = "UPDATE ChiTietQuanAo SET  SoLuong = ? WHERE id = ?";
+            String sql = "UPDATE ChiTietQuanAo SET  SoLuong = ? WHERE MaQuanAo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, soLuong);
-            ps.setString(2, id);
+            ps.setString(2, ma);
 
             return ps.executeUpdate();
 
@@ -247,14 +247,14 @@ public class ChiTietQuanAoRepository implements IChiTietQuanAoRepository {
     }
 
     @Override
-    public Integer getSoLuong(String id) {
+    public Integer getSoLuong(String ma) {
         int soLuong = 0;
         try {
             Connection conn = DBcontext.getConnection();
-            String sql = "select SoLuong from ChiTietQuanAo where Id = ?";
+            String sql = "select SoLuong from ChiTietQuanAo where MaQuanAo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setString(1, id);
+            ps.setString(1, ma);
 
             ps.execute();
             ResultSet rs = ps.getResultSet();

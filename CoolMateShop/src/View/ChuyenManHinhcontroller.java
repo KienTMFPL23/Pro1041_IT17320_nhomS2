@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
  */
 public class ChuyenManHinhcontroller {
 
+    private JFrame roott;
     private JPanel root;
     private String kindSletecd = "";
     private List<DanhMucBean> list = null;
@@ -47,6 +49,7 @@ public class ChuyenManHinhcontroller {
 
     class lablelEvent implements MouseListener {
 
+        private JFrame nodde;
         private JPanel node;
         private String kind;
         private JPanel jpnItem;
@@ -68,7 +71,7 @@ public class ChuyenManHinhcontroller {
                     node = new SanPhamPanel();
                     break;
                 case "KhachHang":
-                    node = new KhachHangPanel();
+                    nodde = new FrameKhachHang();
                     break;
                 case "BanHang":
                     node = new BanHangPanel();

@@ -160,4 +160,26 @@ public class ChiTietHoaDonRepository implements IChiTietHoaDonRepository {
         return -1;
     }
 
+    @Override
+    public Integer getSLMua(String id) {
+        int soLuongMua = 0;
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "Select SoLuong from ChiTietHoaDon where Id = ? ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                int soLuong = rs.getInt("SoLuong");
+                soLuongMua = soLuong;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return soLuongMua;
+    }
+
 }

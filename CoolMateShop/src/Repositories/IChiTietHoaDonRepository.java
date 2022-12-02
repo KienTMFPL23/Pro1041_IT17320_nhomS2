@@ -25,4 +25,6 @@ public interface IChiTietHoaDonRepository {
     Integer update(String id, int soLuong);
 
     Integer delete(String id);
+    
+    Integer getSLMua(String id);
 }

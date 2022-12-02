@@ -65,4 +65,13 @@ public class ChiTietHoaDonService implements IChiTietHoaDonService {
         }
     }
 
+    @Override
+    public Integer getSlMua(String id) {
+        try {
+            return cthdRepo.getSLMua(id);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
 }
