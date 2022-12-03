@@ -18,8 +18,8 @@ public class TrangChuPanel extends javax.swing.JPanel {
      */
     public TrangChuPanel() {
         initComponents();
-//        Icon icon1 = new ImageIcon("sang.png");
-//        lb_sang.setIcon(icon1);
+//        Icon icon1 = new ImageIcon("img/vien.png");
+//        jLabel5.setIcon(icon1);
 //           Icon icon2 = new ImageIcon("anhcuahang.png");
 //        lb_anh.setIcon(icon1);
     }
@@ -42,6 +42,8 @@ public class TrangChuPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -143,7 +145,7 @@ public class TrangChuPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 494, Short.MAX_VALUE)
+                .addContainerGap(492, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
