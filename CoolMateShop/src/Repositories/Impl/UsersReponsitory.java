@@ -39,7 +39,7 @@ public class UsersReponsitory implements IUsersReponsitory {
                 String email = rs.getString("email");
                 int vaitro = rs.getInt("VaiTro");
                 String matKhau = rs.getString("matkhau");
-                users use = new users(idStr, maStr, hoTenStr, ngaysinh, gioiTinh, sdt, diachi, email, vaitro,matKhau);
+                users use = new users(idStr, maStr, hoTenStr, ngaysinh, gioiTinh, sdt, diachi, email, vaitro, matKhau);
                 list.add(use);
 
             }
@@ -53,7 +53,7 @@ public class UsersReponsitory implements IUsersReponsitory {
     public Integer them(users Users) {
         try {
             Connection conn = DBcontext.getConnection();
-            String sql = "insert into users(ma,hoten,ngaysinh,gioitinh,sdt,diachi,email,vaitro) values(?,?,?,?,?,?,?,?)";
+            String sql = "insert into users(ma,hoten,ngaysinh,gioitinh,sdt,diachi,email,vaitro,matkhau) values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, Users.getMa());
             ps.setString(2, Users.getHoten());
@@ -63,6 +63,7 @@ public class UsersReponsitory implements IUsersReponsitory {
             ps.setString(6, Users.getDiaChi());
             ps.setString(7, Users.getEmail());
             ps.setInt(8, Users.getVaiTro());
+            ps.setString(9, Users.getMatKhau());
             return ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
