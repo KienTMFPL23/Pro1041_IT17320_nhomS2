@@ -18,6 +18,8 @@ public interface IHoaDonService {
 
     ArrayList<HoaDonViewModel> getAll();
 
+    ArrayList<HoaDonViewModel> dsHoaDon();
+
     Integer them(HoaDon hd);
 
     Integer sua(String ma, HoaDon hd);
@@ -29,6 +31,8 @@ public interface IHoaDonService {
     Integer hdCho(HoaDon hd);
 
     Integer updateTT(String ma, int trangThai);
-    
+
     Integer updateHoaDon(HoaDon hd, String id);
+    
+    Float getSumMoney( String ma);
 }

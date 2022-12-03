@@ -88,4 +88,14 @@ public class HoaDonService implements IHoaDonService {
         }
     }
 
+    @Override
+    public ArrayList<HoaDonViewModel> dsHoaDon() {
+        return hdr.dsHoaDon();
+    }
+
+    @Override
+    public Float getSumMoney(String ma) {
+        return hdr.getSumMoney(ma);
+    }
+
 }
