@@ -57,7 +57,7 @@ import javax.swing.table.TableRowSorter;
  * @author KIEN TRAN
  */
 public class FrameBanHang extends javax.swing.JFrame {
-
+    
     private IChiTietQuanAoService chiTietQuanAoService;
     private IChiTietHoaDonService chiTietHoaDonService;
     private IUsersSevice userService;
@@ -75,7 +75,7 @@ public class FrameBanHang extends javax.swing.JFrame {
     private String idHD = "";
     private String idCTQA = "";
     private String idCTHD = "";
-
+    
     private List<ChiTietQuanAoRespone> listQuanAo;
     private List<ChiTietQuanAo> listQA;
     private List<ChiTietHoaDonRespone> listChiTietHD;
@@ -86,10 +86,10 @@ public class FrameBanHang extends javax.swing.JFrame {
     private int a = 1;
     private int i = 1;
     private int rowHD;
-
+    
     public FrameBanHang() {
         initComponents();
-
+        
         chiTietQuanAoService = new ChiTietQuanAoService();
         chiTietHoaDonService = new ChiTietHoaDonService();
         hoaDonService = new HoaDonService();
@@ -99,21 +99,21 @@ public class FrameBanHang extends javax.swing.JFrame {
         clService = new ChatLieuService();
         kcService = new KichCoService();
         msService = new MauSacService();
-
+        
         listQuanAo = chiTietQuanAoService.getAllCTQA();
         listQA = chiTietQuanAoService.getAll();
         listChiTietHD = chiTietHoaDonService.getAll();
-
+        
         listHoaDon = hoaDonService.getAll();
         listhd = hoaDonService.selectList();
         listKhachHang = khachHangService.getList();
         listUser = userService.getlist();
-
+        
         indexHoaDonSelect = 0;
         rowHD = 0;
         loadTableSP(listQuanAo);
         loadTableHoaDon(listHoaDon);
-
+        
         addComboTenQA();
         addComboboxChatLieu();
         addComboboxMauSac();
@@ -121,10 +121,10 @@ public class FrameBanHang extends javax.swing.JFrame {
         addComboboxTheLoai();
         addComboNV();
         addComboKH();
-
+        
         getValuesTongTien();
         btnThanhToan.setEnabled(false);
-
+        
         Icon icon = new ImageIcon("img/plus.png");
         btnAddKh.setIcon(icon);
         btnAddKh.setText("");
@@ -136,7 +136,7 @@ public class FrameBanHang extends javax.swing.JFrame {
         btnPrint.setIcon(icon3);
         setLocationRelativeTo(null);
     }
-
+    
     public void addComboNV() {
         dcbm = (DefaultComboBoxModel) cbNhanVien.getModel();
         dcbm.removeAllElements();
@@ -145,7 +145,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             dcbm.addElement(us.getHoten());
         }
     }
-
+    
     public void addComboKH() {
         dcbm = (DefaultComboBoxModel) cbKhachHang.getModel();
         dcbm.removeAllElements();
@@ -154,7 +154,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             dcbm.addElement(KH.getHoTen());
         }
     }
-
+    
     public void addComboTenQA() {
         dcbm = (DefaultComboBoxModel) cbTenQuanAo.getModel();
         dcbm.removeAllElements();
@@ -163,7 +163,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             dcbm.addElement(qa.getTenSP());
         }
     }
-
+    
     public void addComboboxTheLoai() {
         dcbm = (DefaultComboBoxModel) cbTheLoai.getModel();
         dcbm.removeAllElements();
@@ -172,7 +172,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             dcbm.addElement(tl.getTentl());
         }
     }
-
+    
     public void addComboboxMauSac() {
         dcbm = (DefaultComboBoxModel) cbMauSac.getModel();
         dcbm.removeAllElements();
@@ -181,7 +181,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             dcbm.addElement(ms.getTen());
         }
     }
-
+    
     public void addComboboxKichCo() {
         dcbm = (DefaultComboBoxModel) cbKichCo.getModel();
         dcbm.removeAllElements();
@@ -190,7 +190,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             dcbm.addElement(kc.getSize());
         }
     }
-
+    
     public void addComboboxChatLieu() {
         dcbm = (DefaultComboBoxModel) cbChatLieu.getModel();
         dcbm.removeAllElements();
@@ -199,7 +199,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             dcbm.addElement(cl.getTen());
         }
     }
-
+    
     public void loadTableSP(List<ChiTietQuanAoRespone> lst) {
         dtm = (DefaultTableModel) tbChiTietSanPham.getModel();
         dtm.setRowCount(0);
@@ -211,7 +211,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             dtm.addRow(row);
         }
     }
-
+    
     public void loadTableHoaDon(List<HoaDonViewModel> lst) {
         dtmHoaDon = (DefaultTableModel) tbHoaDon.getModel();
         dtmHoaDon.setRowCount(0);
@@ -222,18 +222,18 @@ public class FrameBanHang extends javax.swing.JFrame {
             dtmHoaDon.addRow(row);
         }
     }
-
+    
     public void filter(String query) {
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(dtm);
         tbChiTietSanPham.setRowSorter(tr);
-
+        
         if (query != "None") {
             tr.setRowFilter(RowFilter.regexFilter(query));
         } else {
             tbChiTietSanPham.setRowSorter(tr);
         }
     }
-
+    
     public void getValuesTongTien() {
         float sumMoney = 0;
         for (int i = 0; i < tbGioHang.getRowCount(); i++) {
@@ -241,7 +241,7 @@ public class FrameBanHang extends javax.swing.JFrame {
         }
         txtTongTien.setText(Float.toString(sumMoney));
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -781,9 +781,9 @@ public class FrameBanHang extends javax.swing.JFrame {
         if (evt.getClickCount() == 1) {
             int row = tbChiTietSanPham.getSelectedRow();
             String sltonStr = tbChiTietSanPham.getValueAt(row, 6).toString();
-
+            
             ChiTietQuanAoRespone ctqa = listQuanAo.get(row);
-
+            
             String soLuongMuaStr = JOptionPane.showInputDialog(this, "bạn muốn số lượng bao nhiêu");
             try {
                 int soLuongMua = Integer.parseInt(soLuongMuaStr);
@@ -792,13 +792,13 @@ public class FrameBanHang extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Khong du san pham");
                     return;
                 }
-
+                
                 int SluongSauKhiMua = slTon - soLuongMua;
                 tbChiTietSanPham.setValueAt(SluongSauKhiMua, row, 6);
-
+                
                 idCTQA = listQA.get(row).getId();
                 System.out.println(idCTQA);
-
+                
                 Float donGia = (Float) tbChiTietSanPham.getValueAt(row, 7);
 
                 ///insert cthd
@@ -807,9 +807,9 @@ public class FrameBanHang extends javax.swing.JFrame {
                 cthd.setIdChiTietQA(this.idCTQA);
                 cthd.setSoLuong(soLuongMua);
                 cthd.setDonGia(donGia);
-
+                
                 chiTietHoaDonService.insert(cthd);
-
+                
                 ChiTietHoaDonRespone chiTietHoaDon = new ChiTietHoaDonRespone();
                 chiTietHoaDon.setIdHD(this.idHD);
                 chiTietHoaDon.setMaQuanAo(ctqa.getMaSP());
@@ -817,13 +817,13 @@ public class FrameBanHang extends javax.swing.JFrame {
                 chiTietHoaDon.setSoLuong(soLuongMua);
                 chiTietHoaDon.setDonGia(ctqa.getGiaTien());
                 chiTietHoaDon.thanhTien(soLuongMua, ctqa.getGiaTien());
-
+                
                 listChiTietHD.add(chiTietHoaDon);
-
+                
                 loadTableChiTietHD(listChiTietHD);
-
+                
                 chiTietQuanAoService.updateSoLuong(this.idCTQA, SluongSauKhiMua);
-
+                
                 getValuesTongTien();
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Vui long nhap so");
@@ -831,9 +831,9 @@ public class FrameBanHang extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tbChiTietSanPhamMouseClicked
-
+    
     public void loadTableChiTietHD(List<ChiTietHoaDonRespone> list) {
-
+        
         dtmGioHang = (DefaultTableModel) tbGioHang.getModel();
         dtmGioHang.setRowCount(0);
         for (ChiTietHoaDonRespone ct : list) {
@@ -862,13 +862,13 @@ public class FrameBanHang extends javax.swing.JFrame {
             return;
         }
     }//GEN-LAST:event_txtTienKhachDuaKeyReleased
-
+    
     public void showHDCT(List<ChiTietHoaDonRespone> list) {
         int row = tbHoaDon.getSelectedRow();
         if (row == -1) {
             return;
         }
-
+        
         list = chiTietHoaDonService.getListHD(this.idHD);
         if (list != null) {
             dtmGioHang = (DefaultTableModel) tbGioHang.getModel();
@@ -891,10 +891,10 @@ public class FrameBanHang extends javax.swing.JFrame {
         showHDCT(listChiTietHD);
         System.out.println(idHD);
     }//GEN-LAST:event_tbHoaDonMouseClicked
-
+    
     public void thanhToan() {
         int choice = JOptionPane.showConfirmDialog(this, "Bạn muốn thanh toán không");
-
+        
         if (choice == JOptionPane.YES_OPTION) {
             String sdt = txtSDT.getText();
             int khachHang = cbKhachHang.getSelectedIndex();
@@ -905,7 +905,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             long millis = System.currentTimeMillis();
             java.sql.Date date = new java.sql.Date(millis);
             int trangThai = 1;
-
+            
             HoaDon hd = new HoaDon(kh.getId(), us.getId(), date, trangThai);
 //        hoaDonService.updateHoaDon(hd, idHD);
             if (hoaDonService.updateHoaDon(hd, idHD) > 0) {
@@ -913,7 +913,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             }
             bill_print();
             lblMaHD.setText("-");
-
+            
             txtSDT.setText("");
             txtTongTien.setText("");
             txtTienThua.setText("");
@@ -922,7 +922,7 @@ public class FrameBanHang extends javax.swing.JFrame {
             cbKhachHang.setSelectedIndex(0);
             dtmHoaDon = (DefaultTableModel) tbHoaDon.getModel();
             dtmHoaDon.removeRow(rowHD);
-
+            
             dtmGioHang = (DefaultTableModel) tbGioHang.getModel();
             int row = dtmGioHang.getRowCount();
             for (int j = row - 1; j >= 0; j--) {
@@ -930,24 +930,30 @@ public class FrameBanHang extends javax.swing.JFrame {
             }
         }
     }
-
+    
     public void bill_print() {
-
-        bill.setText("                                          COOLMATE  \n");
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+        bill.setText("                                             COOLMATE  \n");
         bill.setText(bill.getText() + "\t5 CẦU DIỄN BẮC TỪ LIÊM- HÀ NỘI \n");
-        bill.setText(bill.getText() + "\tThời trang và hơn thế nữa, \n");
+        bill.setText(bill.getText() + "\t       Thời trang và hơn thế nữa, \n");
+        bill.setText(bill.getText() + "-----------------------------------------------------------------------\n");
+        bill.setText(bill.getText() + "Mã hóa đơn:\t" + lblMaHD.getText() + "\n");
+        bill.setText(bill.getText() + "Tên Nhân Viên:" + cbNhanVien.getSelectedItem().toString() + "\n");
+        bill.setText(bill.getText() + "Tên Khách hàng:\t" + cbKhachHang.getSelectedItem().toString() + "\n");
+        bill.setText(bill.getText() + "Ngày mua:\t" + date + "\n");
         bill.setText(bill.getText() + "-----------------------------------------------------------------------\n");
         bill.setText(bill.getText() + " Tên sp \tSố lượng \tĐơn giá \tTổng tiền\n");
         bill.setText(bill.getText() + "------------------------------------------------------------------------\n");
-
+        
         DefaultTableModel df = (DefaultTableModel) tbGioHang.getModel();
         for (int i = 0; i < tbGioHang.getRowCount(); i++) {
-
+            
             String name = df.getValueAt(i, 1).toString();
             String qt = df.getValueAt(i, 2).toString();
             String prc = df.getValueAt(i, 3).toString();
             String tong = df.getValueAt(i, 4).toString();
-
+            
             bill.setText(bill.getText() + name + "\t" + qt + "\t" + prc + "\t " + tong + "\n");
         }
         bill.setText(bill.getText() + "----------------------------------------------------------------\n");
@@ -958,10 +964,10 @@ public class FrameBanHang extends javax.swing.JFrame {
         bill.setText(bill.getText() + "                     Thanks For Your Business...!" + "\n");
         bill.setText(bill.getText() + "----------------------------------------------------------------\n");
         bill.setText(bill.getText() + "                     Software by Techinbox" + "\n");
-
+        
     }
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-
+        
         thanhToan();
 
     }//GEN-LAST:event_btnThanhToanActionPerformed
@@ -969,7 +975,7 @@ public class FrameBanHang extends javax.swing.JFrame {
     private void cbTenQuanAoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTenQuanAoItemStateChanged
 //        
     }//GEN-LAST:event_cbTenQuanAoItemStateChanged
-
+    
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
 //        dtmHoaDon.setRowCount(0);
@@ -980,15 +986,16 @@ public class FrameBanHang extends javax.swing.JFrame {
         }
         HoaDon hd = new HoaDon();
         Random random = new Random();
-
+        
         int ma = random.nextInt(99999999);
         String mahd = String.valueOf("HD" + ma);
-
+        
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
-
+        
         hd.setMaHd(mahd);
         hd.setNgayTao(date);
+//        hd.setIdUser((String) cbNhanVien.getSelectedItem());
         hd.setTinhTrang(0);
 
 //        listhd.add(hd);
@@ -1006,7 +1013,7 @@ public class FrameBanHang extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int row = tbGioHang.getSelectedRow();
-
+        
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng muốn cập nhật");
             return;
@@ -1015,14 +1022,14 @@ public class FrameBanHang extends javax.swing.JFrame {
         int slton = chiTietQuanAoService.getSLTon(ma);
         int soLuongMua = chiTietHoaDonService.getSlMua(idCTHD);
         String soLuongUpdateStr = JOptionPane.showInputDialog(this, "Nhập số lượng bạn muốn");
-
+        
         try {
             int slUpdate = Integer.parseInt(soLuongUpdateStr);
             if (slUpdate > slton || slUpdate < 1) {
                 JOptionPane.showMessageDialog(this, "Không hợp lệ");
                 return;
             }
-
+            
             listChiTietHD = chiTietHoaDonService.getListHD(idHD);
             idCTHD = listChiTietHD.get(row).getId();
             //update hdct
@@ -1043,35 +1050,35 @@ public class FrameBanHang extends javax.swing.JFrame {
     private void cbTenQuanAoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTenQuanAoActionPerformed
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(((DefaultTableModel) tbChiTietSanPham.getModel()));
         sorter.setRowFilter(RowFilter.regexFilter(String.valueOf(cbTenQuanAo.getSelectedItem())));
-
+        
         tbChiTietSanPham.setRowSorter(sorter);
     }//GEN-LAST:event_cbTenQuanAoActionPerformed
 
     private void cbTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTheLoaiActionPerformed
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(((DefaultTableModel) tbChiTietSanPham.getModel()));
         sorter.setRowFilter(RowFilter.regexFilter(String.valueOf(cbTheLoai.getSelectedItem())));
-
+        
         tbChiTietSanPham.setRowSorter(sorter);
     }//GEN-LAST:event_cbTheLoaiActionPerformed
 
     private void cbKichCoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKichCoActionPerformed
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(((DefaultTableModel) tbChiTietSanPham.getModel()));
         sorter.setRowFilter(RowFilter.regexFilter(String.valueOf(cbKichCo.getSelectedItem())));
-
+        
         tbChiTietSanPham.setRowSorter(sorter);
     }//GEN-LAST:event_cbKichCoActionPerformed
 
     private void cbMauSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMauSacActionPerformed
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(((DefaultTableModel) tbChiTietSanPham.getModel()));
         sorter.setRowFilter(RowFilter.regexFilter(String.valueOf(cbMauSac.getSelectedItem())));
-
+        
         tbChiTietSanPham.setRowSorter(sorter);
     }//GEN-LAST:event_cbMauSacActionPerformed
 
     private void cbChatLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChatLieuActionPerformed
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(((DefaultTableModel) tbChiTietSanPham.getModel()));
         sorter.setRowFilter(RowFilter.regexFilter(String.valueOf(cbChatLieu.getSelectedItem())));
-
+        
         tbChiTietSanPham.setRowSorter(sorter);
     }//GEN-LAST:event_cbChatLieuActionPerformed
 
@@ -1094,7 +1101,7 @@ public class FrameBanHang extends javax.swing.JFrame {
         idCTQA = listQuanAo.get(row).getId();
         listChiTietHD = chiTietHoaDonService.getListHD(idHD);
         idCTHD = listChiTietHD.get(row).getId();
-
+        
         int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không");
         if (choice != JOptionPane.YES_OPTION) {
             return;
@@ -1106,7 +1113,7 @@ public class FrameBanHang extends javax.swing.JFrame {
 
             //update ctqa
             listQuanAo = chiTietQuanAoService.getAllCTQA();
-
+            
             chiTietQuanAoService.updateSoLuong(ma, slton + soLuongMua);
             listQuanAo = chiTietQuanAoService.getAllCTQA();
             loadTableSP(listQuanAo);
@@ -1137,7 +1144,7 @@ public class FrameBanHang extends javax.swing.JFrame {
 //        loadTableChiTietHD(listChiTietHD);
         int row = tbGioHang.getSelectedRow();
         idCTQA = listChiTietHD.get(row).getIdCTQA();
-
+        
         idCTHD = listChiTietHD.get(row).getId();
     }//GEN-LAST:event_tbGioHangMouseClicked
 

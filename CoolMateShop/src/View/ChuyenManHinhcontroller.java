@@ -93,7 +93,8 @@ public class ChuyenManHinhcontroller {
                     node = new ThongKePanel();
                     break;
                 case "HoaDon":
-                    node = new HoaDonPanel();
+//                    node = new HoaDonPanel();
+                    node = new QuanLyHoaDonPanel();
                     break;
 
                 default:

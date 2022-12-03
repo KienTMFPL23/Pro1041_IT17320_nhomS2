@@ -19,6 +19,7 @@ public class HoaDonViewModel {
     private Date ngayTao;
     private Date ngayThanhToan;
     private int tinhTrang;
+    private float tongtien;
 
     public HoaDonViewModel(String khachHang, String users, String maHD, Date ngayTao, Date ngayThanhToan, int tinhTrang) {
 
@@ -38,6 +39,25 @@ public class HoaDonViewModel {
         this.ngayTao = ngayTao;
         this.ngayThanhToan = ngayThanhToan;
         this.tinhTrang = tinhTrang;
+    }
+
+    public HoaDonViewModel(String id, String khachHang, String users, String maHD, Date ngayTao, Date ngayThanhToan, int tinhTrang, float tongtien) {
+        this.id = id;
+        this.khachHang = khachHang;
+        this.users = users;
+        this.maHD = maHD;
+        this.ngayTao = ngayTao;
+        this.ngayThanhToan = ngayThanhToan;
+        this.tinhTrang = tinhTrang;
+        this.tongtien = tongtien;
+    }
+
+    public float getTongtien() {
+        return tongtien;
+    }
+
+    public void setTongtien(float tongtien) {
+        this.tongtien = tongtien;
     }
 
     public String getId() {

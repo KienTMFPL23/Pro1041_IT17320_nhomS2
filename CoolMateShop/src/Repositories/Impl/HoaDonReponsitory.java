@@ -210,4 +210,57 @@ public class HoaDonReponsitory implements IHoaDonReponsitory {
         return -1;
     }
 
+    @Override
+    public ArrayList<HoaDonViewModel> dsHoaDon() {
+        ArrayList<HoaDonViewModel> list = new ArrayList<>();
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "select cthd.idHD,khachhang.HoTen as 'khachhang',users.HoTen as 'us' ,HoaDon.mahd,NgayTao,NgayThanhToan,TinhTrang,sum(SoLuong * DonGia )as 'thanhtien' \n"
+                    + "                    from HoaDon join KhachHang   on HoaDon.IdKH = KhachHang.Id\n"
+                    + "                    join Users on Users.id = HoaDon.IdUser \n"
+                    + "                    join chitiethoadon cthd on HoaDon.id = cthd.idHD\n"
+                    + "					group by cthd.idHD ,khachhang.HoTen ,users.HoTen ,HoaDon.mahd,NgayTao,NgayThanhToan,TinhTrang";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String id = rs.getString("IdHD");
+                String khachhang = rs.getString("khachhang");
+                String nguoidung = rs.getString("us");
+                String mahd = rs.getString("mahd");
+                java.sql.Date ngayTao = rs.getDate("ngaytao");
+                java.sql.Date ngaythanhtoan = rs.getDate("ngaythanhtoan");
+                int trangthai = rs.getInt("TinhTrang");
+                float tongtien = rs.getFloat("thanhtien");
+                HoaDonViewModel hd = new HoaDonViewModel(id, khachhang, nguoidung, mahd, ngayTao, ngaythanhtoan, trangthai, tongtien);
+                list.add(hd);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public Float getSumMoney(String ma) {
+        float sumMoney = 0;
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "select sum(SoLuong * DonGia )as 'thanhtien'  from ChiTietHoaDon cthd join HoaDon hd on cthd.IdHD = hd.Id\n"
+                    + "where MaHD = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ma);
+
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                float sum = rs.getFloat("thanhtien");
+                sumMoney = sum;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sumMoney;
+    }
+
 }
