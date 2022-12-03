@@ -7,6 +7,7 @@ package View;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,12 +28,11 @@ public class Main extends javax.swing.JFrame {
         lisst.add(new DanhMucBean("TrangChu", jpntrangchu, jlbTrangChu));
         lisst.add(new DanhMucBean("SanPham", jpnSanPham, jlbSanPham));
         lisst.add(new DanhMucBean("KhachHang", jpnKhachHang, jlbKhachHang));
-        lisst.add(new DanhMucBean("HoaDon",jpnHoaDon,jlbHoaDon));
+        lisst.add(new DanhMucBean("HoaDon", jpnHoaDon, jlbHoaDon));
 //        lisst.add(new DanhMucBean("DoiTra", jpnDoiTra, jlbDoiTra));
         lisst.add(new DanhMucBean("BanHang", jpnBanHang, jlbBanHang));
         lisst.add(new DanhMucBean("NhanVien", jpnNhanVien, jlbNhanVien));
         lisst.add(new DanhMucBean("ThongKe", jpnThongKe, jlbThongKe));
-       
 
         SetIcon();
         controller.setEvent(lisst);
@@ -49,8 +49,8 @@ public class Main extends javax.swing.JFrame {
         jlbBanHang.setIcon(icon3);
         Icon icon4 = new ImageIcon("img/KhachHang.png");
         jlbKhachHang.setIcon(icon4);
-        Icon icon6 = new ImageIcon("img/DoiTra.png");
-//        jlbDoiTra.setIcon(icon6);
+        Icon icon6 = new ImageIcon("img/logout.png");
+        btn_dangXuat.setIcon(icon6);
         Icon icon7 = new ImageIcon("img/KhachHang.png");
         jlbKhachHang.setIcon(icon7);
         Icon icon5 = new ImageIcon("img/NhanVien.png");
@@ -59,6 +59,7 @@ public class Main extends javax.swing.JFrame {
         jlbThongKe.setIcon(icon8);
         Icon icon9 = new ImageIcon("img/Thoat.png");
         btnThoat.setIcon(icon9);
+
     }
 
     /**
@@ -91,12 +92,14 @@ public class Main extends javax.swing.JFrame {
         jlbThongKe = new javax.swing.JLabel();
         jpnBanHang = new javax.swing.JPanel();
         jlbBanHang = new javax.swing.JLabel();
+        btn_dangXuat = new javax.swing.JButton();
         jpnView = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jpnLayout.setBackground(new java.awt.Color(204, 255, 255));
+        jpnLayout.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jpnthanhTab.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -124,7 +127,7 @@ public class Main extends javax.swing.JFrame {
         jpnthanhTabLayout.setHorizontalGroup(
             jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnthanhTabLayout.createSequentialGroup()
-                .addContainerGap(409, Short.MAX_VALUE)
+                .addContainerGap(407, Short.MAX_VALUE)
                 .addGroup(jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnthanhTabLayout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -152,6 +155,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         jpnMenu.setBackground(new java.awt.Color(204, 255, 255));
+        jpnMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 204, 204)));
 
         jpntrangchu.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -311,6 +315,14 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jlbBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
         );
 
+        btn_dangXuat.setText("Đăng Xuất");
+        btn_dangXuat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_dangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dangXuatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnMenuLayout = new javax.swing.GroupLayout(jpnMenu);
         jpnMenu.setLayout(jpnMenuLayout);
         jpnMenuLayout.setHorizontalGroup(
@@ -322,6 +334,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jpnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpnNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jpnBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_dangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jpnMenuLayout.setVerticalGroup(
             jpnMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,20 +346,22 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jpnKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
+                .addGap(18, 18, 18)
+                .addComponent(btn_dangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpnViewLayout = new javax.swing.GroupLayout(jpnView);
         jpnView.setLayout(jpnViewLayout);
         jpnViewLayout.setHorizontalGroup(
             jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 937, Short.MAX_VALUE)
+            .addGap(0, 933, Short.MAX_VALUE)
         );
         jpnViewLayout.setVerticalGroup(
             jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,6 +407,15 @@ public class Main extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnThoatActionPerformed
 
+    private void btn_dangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangXuatActionPerformed
+        // TODO add your handling code here:
+        int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất khỏi ứng dụng ko ?");
+        if (check != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+    }//GEN-LAST:event_btn_dangXuatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -430,6 +454,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThoat;
+    private javax.swing.JButton btn_dangXuat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jlbBanHang;
