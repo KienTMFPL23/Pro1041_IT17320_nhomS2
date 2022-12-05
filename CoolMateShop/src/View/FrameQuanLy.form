@@ -3,6 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -136,7 +137,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                                 <TitledBorder title="Qu&#x1ea3;n l&#xfd; qu&#x1ea7;n &#xe1;o">
-                                  <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
+                                  <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
                                 </TitledBorder>
                               </Border>
                             </Property>
@@ -537,7 +538,9 @@
                           <Properties>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                <TitledBorder title="Th&#xf4;ng tin s&#x1ea3;n ph&#x1ea9;m"/>
+                                <TitledBorder title="Th&#xf4;ng tin s&#x1ea3;n ph&#x1ea9;m">
+                                  <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
+                                </TitledBorder>
                               </Border>
                             </Property>
                           </Properties>
@@ -784,26 +787,41 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel12">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="T&#xea;n qu&#x1ea7;n &#xe1;o"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel13">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i qu&#x1ea7;n &#xe1;o"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel14">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="K&#xed;ch c&#x1ee1;"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel15">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="M&#xe0;u s&#x1eaf;c"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel16">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="Ch&#x1ea5;t li&#x1ec7;u"/>
                               </Properties>
                             </Component>
@@ -853,7 +871,9 @@
                           <Properties>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                <TitledBorder title="Thu&#x1ed9;c t&#xed;nh s&#x1ea3;n ph&#x1ea9;m"/>
+                                <TitledBorder title="Thu&#x1ed9;c t&#xed;nh s&#x1ea3;n ph&#x1ea9;m">
+                                  <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
+                                </TitledBorder>
                               </Border>
                             </Property>
                           </Properties>
@@ -890,7 +910,7 @@
                                               <Component id="rdTheLoai" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                               <Component id="rdChatLieu" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="113" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="109" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -931,6 +951,9 @@
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="jLabel1">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="T&#xea;n thu&#x1ed9;c t&#xed;nh"/>
                               </Properties>
                             </Component>
@@ -938,6 +961,9 @@
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="rdMauSac">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="M&#xe0;u s&#x1eaf;c"/>
                               </Properties>
                               <Events>
@@ -946,6 +972,9 @@
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="rdKichCo">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="K&#xed;ch c&#x1ee1;"/>
                               </Properties>
                               <Events>
@@ -954,6 +983,9 @@
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="rdTheLoai">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="Th&#x1ec3; lo&#x1ea1;i"/>
                               </Properties>
                               <Events>
@@ -962,6 +994,9 @@
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="rdChatLieu">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="Ch&#x1ea5;t li&#x1ec7;u"/>
                               </Properties>
                               <Events>
@@ -994,6 +1029,9 @@
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel7">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="12" style="1"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="M&#xe3; thu&#x1ed9;c t&#xed;nh"/>
                               </Properties>
                             </Component>
@@ -1005,7 +1043,9 @@
                           <Properties>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                <TitledBorder title="Th&#xf4;ng tin thu&#x1ed9;c t&#xed;nh"/>
+                                <TitledBorder title="Th&#xf4;ng tin thu&#x1ed9;c t&#xed;nh">
+                                  <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
+                                </TitledBorder>
                               </Border>
                             </Property>
                           </Properties>

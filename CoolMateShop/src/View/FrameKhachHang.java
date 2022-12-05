@@ -27,12 +27,19 @@ public class FrameKhachHang extends javax.swing.JFrame {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private int index = 1;
     private ButtonGroup btg;
+    private String dataSDT;
 
-    public FrameKhachHang() {
+    public FrameKhachHang(String dataSDT) {
         initComponents();
         khService = new KhachHangService();
         rdGioiTinh();
         loadTable();
+        this.dataSDT = dataSDT;
+        txt_sdt.setText(dataSDT);
+    }
+
+    private FrameKhachHang() {
+
     }
 
     public void rdGioiTinh() {
@@ -84,8 +91,8 @@ public class FrameKhachHang extends javax.swing.JFrame {
         }
         boolean kt = sdtStr.matches(reg);
         if (kt == false) {
-            JOptionPane.showMessageDialog(this,"Sai định dạng Sdt");
-            return null ;
+            JOptionPane.showMessageDialog(this, "Sai định dạng Sdt");
+            return null;
         }
         int sdt = -1;
         try {
