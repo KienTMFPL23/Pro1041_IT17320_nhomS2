@@ -4,6 +4,8 @@ import DomainModel.KhachHang;
 import Repositories.Impl.KhachHangRepository;
 import Service.IKhachHangService;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 public class KhachHangService implements IKhachHangService {
@@ -59,5 +61,4 @@ public class KhachHangService implements IKhachHangService {
             return null;
         }
     }
-
 }

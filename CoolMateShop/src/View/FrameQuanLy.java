@@ -346,10 +346,11 @@ public class FrameQuanLy extends javax.swing.JFrame {
         tbThuocTinh = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý quần áo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quản lý quần áo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         jLabel2.setText("Mã sản phẩm");
 
@@ -589,7 +590,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin sản phẩm"));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         tbChiTietQuanAo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -641,14 +642,19 @@ public class FrameQuanLy extends javax.swing.JFrame {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Tên quần áo");
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setText("Loại quần áo");
 
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setText("Kích cỡ");
 
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Màu sắc");
 
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setText("Chất liệu");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -730,10 +736,12 @@ public class FrameQuanLy extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Thông tin chi tiết", jPanel4);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thuộc tính sản phẩm"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thuộc tính sản phẩm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Tên thuộc tính");
 
+        rdMauSac.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rdMauSac.setText("Màu sắc");
         rdMauSac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -741,6 +749,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
             }
         });
 
+        rdKichCo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rdKichCo.setText("Kích cỡ");
         rdKichCo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -748,6 +757,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
             }
         });
 
+        rdTheLoai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rdTheLoai.setText("Thể loại");
         rdTheLoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -755,6 +765,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
             }
         });
 
+        rdChatLieu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rdChatLieu.setText("Chất liệu");
         rdChatLieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -783,6 +794,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Mã thuộc tính");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -815,7 +827,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
                         .addComponent(rdTheLoai)
                         .addGap(39, 39, 39)
                         .addComponent(rdChatLieu)
-                        .addGap(0, 113, Short.MAX_VALUE))))
+                        .addGap(0, 109, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -842,7 +854,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin thuộc tính"));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin thuộc tính", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         tbThuocTinh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
