@@ -147,6 +147,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         btnxoa = new javax.swing.JButton();
         btn_Sua = new javax.swing.JButton();
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin User"));
 
         jLabel1.setText("ID");
@@ -282,6 +283,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(204, 255, 204));
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tb_USer.setModel(new javax.swing.table.DefaultTableModel(

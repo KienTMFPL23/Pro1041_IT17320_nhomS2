@@ -57,8 +57,10 @@ public class Main extends javax.swing.JFrame {
         jlbNhanVien.setIcon(icon5);
         Icon icon8 = new ImageIcon("img/ThongKe.png");
         jlbThongKe.setIcon(icon8);
-        Icon icon9 = new ImageIcon("img/Thoat.png");
-        btnThoat.setIcon(icon9);
+        Icon icon10 = new ImageIcon("img/anhlogocool.png");
+        lb_logo.setIcon(icon10);
+//        Icon icon9 = new ImageIcon("img/button.png");
+//        jButton1.setIcon(icon9);
 
     }
 
@@ -74,9 +76,6 @@ public class Main extends javax.swing.JFrame {
         jpnLayout = new javax.swing.JPanel();
         jpnthanhTab = new javax.swing.JPanel();
         lb_logo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        btnThoat = new javax.swing.JButton();
         jpnMenu = new javax.swing.JPanel();
         jpntrangchu = new javax.swing.JPanel();
         jlbTrangChu = new javax.swing.JLabel();
@@ -97,61 +96,23 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpnLayout.setBackground(new java.awt.Color(204, 255, 255));
+        jpnLayout.setBackground(new java.awt.Color(255, 204, 204));
         jpnLayout.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jpnthanhTab.setBackground(new java.awt.Color(204, 255, 255));
-
-        lb_logo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        lb_logo.setForeground(new java.awt.Color(0, 102, 102));
-        lb_logo.setText("COOLMATE SHOP ");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText(" Địa Chỉ : 11 Đường Cầu Diễn , Phúc Diễn , Bắc Từ Liêm , Hà Nội");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel2.setText("-     Thời trang và hơn thế nữa     -");
-
-        btnThoat.setText("Thoát");
-        btnThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThoatActionPerformed(evt);
-            }
-        });
+        jpnthanhTab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jpnthanhTabLayout = new javax.swing.GroupLayout(jpnthanhTab);
         jpnthanhTab.setLayout(jpnthanhTabLayout);
         jpnthanhTabLayout.setHorizontalGroup(
             jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnthanhTabLayout.createSequentialGroup()
-                .addContainerGap(407, Short.MAX_VALUE)
-                .addGroup(jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnthanhTabLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnthanhTabLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(370, 370, 370))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnthanhTabLayout.createSequentialGroup()
-                        .addComponent(lb_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(268, 268, 268)
-                        .addComponent(btnThoat)
-                        .addContainerGap())))
+            .addComponent(lb_logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jpnthanhTabLayout.setVerticalGroup(
             jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnthanhTabLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(jpnthanhTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_logo)
-                    .addComponent(btnThoat))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1))
+            .addComponent(lb_logo, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
         );
 
         jpnMenu.setBackground(new java.awt.Color(204, 255, 255));
@@ -354,18 +315,18 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jpnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_dangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpnViewLayout = new javax.swing.GroupLayout(jpnView);
         jpnView.setLayout(jpnViewLayout);
         jpnViewLayout.setHorizontalGroup(
             jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 933, Short.MAX_VALUE)
+            .addGap(0, 943, Short.MAX_VALUE)
         );
         jpnViewLayout.setVerticalGroup(
             jpnViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 651, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpnLayoutLayout = new javax.swing.GroupLayout(jpnLayout);
@@ -376,7 +337,8 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jpnLayoutLayout.createSequentialGroup()
                 .addComponent(jpnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jpnLayoutLayout.setVerticalGroup(
             jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,32 +347,28 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnLayoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jpnLayoutLayout.createSequentialGroup()
+                        .addComponent(jpnView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnLayout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jpnLayout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_btnThoatActionPerformed
-
     private void btn_dangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangXuatActionPerformed
         // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất khỏi ứng dụng ko ?");
-        if (check != JOptionPane.YES_OPTION) {
+        if (check == JOptionPane.YES_OPTION) {
+//               Main m = new Main();
+//            m.setVisible(false);
+//            m.set;
+            
+            DangNhap dn = new DangNhap();
+            dn.setVisible(true);
+         
+        }else{
             return;
         }
         
@@ -453,10 +411,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThoat;
     private javax.swing.JButton btn_dangXuat;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jlbBanHang;
     private javax.swing.JLabel jlbHoaDon;
     private javax.swing.JLabel jlbKhachHang;
