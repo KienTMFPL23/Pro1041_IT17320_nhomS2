@@ -27,6 +27,8 @@ import ViewModel.TheLoaiViewModel;
 import java.awt.Button;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -246,6 +248,12 @@ public class FrameQuanLy extends javax.swing.JFrame {
     public void addCbKichCo() {
         dcbmKC = (DefaultComboBoxModel) cbKichCo.getModel();
         dcbmKC.removeAllElements();
+        Collections.sort(kcs.getAll(), new Comparator<KichCo>() {
+            @Override
+            public int compare(KichCo o1, KichCo o2) {
+                return o1.getMa().compareToIgnoreCase(o2.getMa());
+            }
+        });
         for (KichCo kichCo : kcs.getAll()) {
             dcbmKC.addElement(kichCo);
         }
@@ -315,6 +323,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbChiTietQuanAo = new javax.swing.JTable();
@@ -406,6 +415,11 @@ public class FrameQuanLy extends javax.swing.JFrame {
                 btnMauMouseClicked(evt);
             }
         });
+        btnMau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMauActionPerformed(evt);
+            }
+        });
 
         btnSize.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -422,6 +436,11 @@ public class FrameQuanLy extends javax.swing.JFrame {
         btnTL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnTLMouseClicked(evt);
+            }
+        });
+        btnTL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTLActionPerformed(evt);
             }
         });
 
@@ -455,20 +474,27 @@ public class FrameQuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAdd)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAdd)
+                    .addComponent(btnClear))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(btnUpdate)
-                .addGap(21, 21, 21))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(btnClear)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDelete))
+                .addGap(19, 19, 19))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,7 +504,9 @@ public class FrameQuanLy extends javax.swing.JFrame {
                     .addComponent(btnAdd)
                     .addComponent(btnUpdate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(btnClear)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClear)
+                    .addComponent(btnDelete))
                 .addContainerGap())
         );
 
@@ -1116,6 +1144,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
         txtGiaBan.setText("");
         txtSoLuong.setText("");
         lblImage.setText("");
+        lblImage.setIcon(null);
         cbChatLieu.setSelectedIndex(0);
         cbMauSac.setSelectedIndex(0);
         cbLoaiSP.setSelectedIndex(0);
@@ -1230,6 +1259,34 @@ public class FrameQuanLy extends javax.swing.JFrame {
 
         tbChiTietQuanAo.setRowSorter(sorter);
     }//GEN-LAST:event_cbclActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int row = tbChiTietQuanAo.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng muốn xóa");
+            return;
+        }
+        String ma = tbChiTietQuanAo.getValueAt(row, 0).toString();
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không");
+        if (choice == JOptionPane.YES_OPTION) {
+            if (chiTietQuanAoService.delete(ma) > -1) {
+                JOptionPane.showMessageDialog(this, "Thành công");
+                loadTableCTQA();
+                cleaFormCTQA();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thất bại");
+                return;
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnMauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMauActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMauActionPerformed
+
+    private void btnTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTLActionPerformed
 
     public void loadTableMau() {
         int i = 1;
@@ -1513,6 +1570,7 @@ public class FrameQuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCL;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnMau;
     private javax.swing.JButton btnReload;
     private javax.swing.JButton btnSize;
