@@ -124,7 +124,17 @@ public class ChiTietQuanAoRepository implements IChiTietQuanAoRepository {
 
     @Override
     public Integer delete(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "Delete from ChiTietQuanAo where MaQuanAo = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ma);
+            return ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
     }
 
     @Override

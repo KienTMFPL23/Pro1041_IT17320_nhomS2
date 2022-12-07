@@ -48,7 +48,11 @@ public class ChiTietQuanAoService implements IChiTietQuanAoService {
 
     @Override
     public Integer delete(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return chiTietQuanAoRepository.delete(ma);
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
     @Override
