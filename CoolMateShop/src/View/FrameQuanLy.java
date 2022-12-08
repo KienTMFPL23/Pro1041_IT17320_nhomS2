@@ -25,7 +25,9 @@ import ViewModel.KichCoRepon;
 import ViewModel.MauSacRespone;
 import ViewModel.TheLoaiViewModel;
 import java.awt.Button;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,6 +41,8 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 
 /**
  *
@@ -1158,6 +1162,18 @@ public class FrameQuanLy extends javax.swing.JFrame {
         if (chiTietQuanAoService.checkMa(txtMaSP.getText().trim()) != null) {
             JOptionPane.showMessageDialog(this, "Trùng mã");
             return;
+        }
+        try {
+            ByteArrayOutputStream out = QRCode.from(txtMaSP.getText()).to(ImageType.PNG).stream();
+            String f_name = txtMaSP.getText();
+            String Path_name = "D:\\FPT Polytechnic\\MaCode";
+
+            FileOutputStream fout = new FileOutputStream(new File(Path_name + (f_name + ".PNG")));
+            fout.write(out.toByteArray());
+            fout.flush();
+            System.out.println("succees");
+        } catch (Exception e) {
+            System.out.println(e);
         }
         if (chiTietQuanAoService.insert(ctqa) > 0) {
             JOptionPane.showMessageDialog(this, "Thành công");
