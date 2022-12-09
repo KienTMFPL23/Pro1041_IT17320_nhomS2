@@ -1,6 +1,5 @@
 package View;
 
-
 import DomainModel.users;
 import Service.IDangNhapService;
 import Service.Impl.DangNhapService;
@@ -140,8 +139,11 @@ public class DangNhap extends javax.swing.JFrame {
             if (u.getVaiTro() == 1) {
                 Main m = new Main();
                 m.setVisible(true);
+                DangNhap.this.setVisible(false);
             } else {
-
+                FrameMainNhanVien nv = new FrameMainNhanVien();
+                nv.setVisible(true);
+                DangNhap.this.setVisible(false);
             }
         }
     }//GEN-LAST:event_btn_dangNhapActionPerformed

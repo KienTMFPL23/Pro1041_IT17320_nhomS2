@@ -21,7 +21,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         setLocationRelativeTo(null);
-
+        
         ChuyenManHinhcontroller controller = new ChuyenManHinhcontroller(jpnView);
         controller.setView(jpntrangchu, jlbTrangChu);
         java.util.List<DanhMucBean> lisst = new ArrayList<>();
@@ -33,11 +33,11 @@ public class Main extends javax.swing.JFrame {
         lisst.add(new DanhMucBean("BanHang", jpnBanHang, jlbBanHang));
         lisst.add(new DanhMucBean("NhanVien", jpnNhanVien, jlbNhanVien));
         lisst.add(new DanhMucBean("ThongKe", jpnThongKe, jlbThongKe));
-
+        
         SetIcon();
         controller.setEvent(lisst);
     }
-
+    
     public void SetIcon() {
         Icon icon = new ImageIcon("img/TrangChu.png");
         jlbTrangChu.setIcon(icon);
@@ -361,14 +361,12 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất khỏi ứng dụng ko ?");
         if (check == JOptionPane.YES_OPTION) {
-//               Main m = new Main();
-//            m.setVisible(false);
-//            m.set;
+            Main.this.setVisible(false);
             
             DangNhap dn = new DangNhap();
             dn.setVisible(true);
-         
-        }else{
+            
+        } else {
             return;
         }
         
