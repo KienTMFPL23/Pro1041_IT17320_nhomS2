@@ -310,7 +310,7 @@ public class FrameKhachHang extends javax.swing.JFrame {
                                 .addGap(40, 40, 40)
                                 .addComponent(btn_find)
                                 .addGap(41, 41, 41)
-                                .addComponent(txt_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
