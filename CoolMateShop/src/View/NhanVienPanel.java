@@ -86,6 +86,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng ko để trống thông tin");
             return null;
         }
+        if(maStr.length() >255 || hoTenStr.length() > 100 || sdt.length() > 15 || diaChi.length() > 255 || email.length() > 255 ){
+            JOptionPane.showMessageDialog(this, " nhập quá kí tự quy định ");
+            return null;
+        }
+        
         if(!rbNam.isSelected() && !rbNu.isSelected()){
             JOptionPane.showMessageDialog(this, "Ch chọn giới tính");
             return null;

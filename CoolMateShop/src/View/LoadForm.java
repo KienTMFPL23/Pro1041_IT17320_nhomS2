@@ -35,6 +35,7 @@ public class LoadForm extends javax.swing.JFrame {
                         Logger.getLogger(LoadForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                LoadForm.this.setVisible(false);
                 DangNhap dn = new DangNhap();
                 dn.setVisible(true);
 

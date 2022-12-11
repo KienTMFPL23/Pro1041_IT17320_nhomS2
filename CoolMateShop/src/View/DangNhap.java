@@ -130,6 +130,9 @@ public class DangNhap extends javax.swing.JFrame {
     private void btn_dangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangNhapActionPerformed
         // TODO add your handling code here:
         users u = this.getForm();
+        if (u == null) {
+            return;
+        }
         users account = dns.login(txtMa.getText().trim(), matkhau.getText().trim());
         if (account == null) {
             JOptionPane.showMessageDialog(this, "Sai tài khoản");
