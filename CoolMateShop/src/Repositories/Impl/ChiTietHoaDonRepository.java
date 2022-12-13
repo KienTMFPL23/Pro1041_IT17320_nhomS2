@@ -182,4 +182,27 @@ public class ChiTietHoaDonRepository implements IChiTietHoaDonRepository {
         return soLuongMua;
     }
 
+    @Override
+    public String getIdQA(String idHD, String idqa) {
+        String idQA = null;
+        try {
+            Connection conn = DBcontext.getConnection();
+            String sql = "select IdChiTietQA from ChiTietHoaDon where IdHD = ? and IdChiTietQA = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, idHD);
+            ps.setString(2, idqa);
+            ps.execute();
+
+            ResultSet rs = ps.getResultSet();
+            while (rs.next()) {
+                String id = rs.getString("IdChiTietQA");
+
+                idQA = id;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return idQA;
+    }
+
 }

@@ -1503,7 +1503,10 @@ public class FrameQuanLy extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng không để trống");
             return null;
         }
-
+        if (tenQuanAo.length() > 255) {
+            JOptionPane.showMessageDialog(this, "Quá giới hạn kí tự cho phép");
+            return null;
+        }
         float giaBan = -1;
         try {
             giaBan = Float.parseFloat(giaBanStr);

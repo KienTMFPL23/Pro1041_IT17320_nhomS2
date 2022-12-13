@@ -23,6 +23,7 @@ public class DangNhap extends javax.swing.JFrame {
      * Creates new form DangNhap
      */
     private IDangNhapService dns;
+    public static String maUser = "";
 
     public DangNhap() {
         initComponents();
@@ -139,6 +140,7 @@ public class DangNhap extends javax.swing.JFrame {
             return;
         } else {
             JOptionPane.showMessageDialog(this, "Thành công");
+            maUser = txtMa.getText();
             if (u.getVaiTro() == 1) {
                 Main m = new Main();
                 m.setVisible(true);

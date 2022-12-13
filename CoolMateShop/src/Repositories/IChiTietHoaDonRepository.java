@@ -27,4 +27,6 @@ public interface IChiTietHoaDonRepository {
     Integer delete(String id);
     
     Integer getSLMua(String id);
+    
+    String getIdQA(String idHD, String idqa);
 }

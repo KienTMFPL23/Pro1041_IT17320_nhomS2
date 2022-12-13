@@ -143,12 +143,11 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
         addComboboxMauSac();
         addComboboxKichCo();
         addComboboxTheLoai();
-        addComboNV();
+//        addComboNV();
         addComboKH();
-
         getValuesTongTien();
         btnThanhToan.setEnabled(false);
-
+        setData();
         Icon icon = new ImageIcon("img/plus.png");
         btnAddKh.setIcon(icon);
         btnAddKh.setText("");
@@ -160,6 +159,28 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
         btnPrint.setIcon(icon3);
         initWebcam();
         setLocationRelativeTo(null);
+        setWebcam();
+    }
+
+    public void setWebcam() {
+        FrameBanHang bh = this;
+        bh.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                webcam.close();
+            }
+        });
+    }
+
+    public void setData() {
+        DangNhap dn = new DangNhap();
+        String maUs = dn.maUser;
+        System.out.println(maUs);
+        for (users us : listUser) {
+            if (maUs.equalsIgnoreCase(us.getMa())) {
+                lblNV.setText(us.getHoten());
+            }
+        }
     }
 
     private void initWebcam() {
@@ -176,15 +197,14 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
         executor.execute((Runnable) this);
     }
 
-    public void addComboNV() {
-        dcbm = (DefaultComboBoxModel) cbNhanVien.getModel();
-        dcbm.removeAllElements();
-//        dcbm.addElement("");
-        for (users us : userService.getlist()) {
-            dcbm.addElement(us.getHoten());
-        }
-    }
-
+//    public void addComboNV() {
+//        dcbm = (DefaultComboBoxModel) cbNhanVien.getModel();
+//        dcbm.removeAllElements();
+////        dcbm.addElement("");
+//        for (users us : userService.getlist()) {
+//            dcbm.addElement(us.getHoten());
+//        }
+//    }
     public void addComboKH() {
         dcbm = (DefaultComboBoxModel) cbKhachHang.getModel();
         dcbm.removeAllElements();
@@ -330,7 +350,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
         btnTaoHoaDon = new javax.swing.JButton();
         lblMaHD = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        cbNhanVien = new javax.swing.JComboBox<>();
+        lblNV = new javax.swing.JLabel();
         pnQR = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
 
@@ -373,6 +393,9 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
         tbChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbChiTietSanPhamMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbChiTietSanPhamMouseEntered(evt);
             }
         });
         jScrollPane2.setViewportView(tbChiTietSanPham);
@@ -681,7 +704,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
 
         jLabel4.setText("Nhân viên");
 
-        cbNhanVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lblNV.setText("-");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -707,13 +730,13 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
                         .addGap(83, 83, 83)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMaHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbNhanVien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtTienKhachDua, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                                        .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)))
+                                        .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                                    .addComponent(lblNV, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 5, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -723,7 +746,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(cbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNV))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMaHD)
@@ -829,12 +852,17 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn");
             return;
         }
-        if (evt.getClickCount() == 1) {
+        if (evt.getClickCount() == 2) {
             int row = tbChiTietSanPham.getSelectedRow();
             String sltonStr = tbChiTietSanPham.getValueAt(row, 6).toString();
 
             ChiTietQuanAoRespone ctqa = listQuanAo.get(row);
+            idCTQA = listQA.get(row).getId();
 
+            if (chiTietHoaDonService.getIdQA(this.idHD, this.idCTQA) != null) {
+                JOptionPane.showMessageDialog(this, "Đã có sản phẩm này trong giỏ hàng");
+                return;
+            }
             String soLuongMuaStr = JOptionPane.showInputDialog(this, "bạn muốn số lượng bao nhiêu");
             try {
                 int soLuongMua = Integer.parseInt(soLuongMuaStr);
@@ -846,9 +874,6 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
 
                 int SluongSauKhiMua = slTon - soLuongMua;
                 tbChiTietSanPham.setValueAt(SluongSauKhiMua, row, 6);
-
-                idCTQA = listQA.get(row).getId();
-                System.out.println(idCTQA);
 
                 Float donGia = (Float) tbChiTietSanPham.getValueAt(row, 7);
 
@@ -953,7 +978,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
         bill.setText(bill.getText() + "\t       Thời trang và hơn thế nữa, \n");
         bill.setText(bill.getText() + "-----------------------------------------------------------------------\n");
         bill.setText(bill.getText() + "Mã hóa đơn:\t" + lblMaHD.getText() + "\n");
-        bill.setText(bill.getText() + "Tên Nhân Viên:" + cbNhanVien.getSelectedItem().toString() + "\n");
+        bill.setText(bill.getText() + "Tên Nhân Viên:" + lblNV.getText() + "\n");
         bill.setText(bill.getText() + "Tên Khách hàng:\t" + cbKhachHang.getSelectedItem().toString() + "\n");
         bill.setText(bill.getText() + "Ngày mua:\t" + date + "\n");
         bill.setText(bill.getText() + "-----------------------------------------------------------------------\n");
@@ -986,15 +1011,22 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
         if (choice == JOptionPane.YES_OPTION) {
             String sdt = txtSDT.getText();
             int khachHang = cbKhachHang.getSelectedIndex();
-            int user = cbNhanVien.getSelectedIndex();
             KhachHang kh = listKhachHang.get(khachHang);
-            users us = listUser.get(user);
+
+            DangNhap dn = new DangNhap();
+            String user = dn.maUser;
+            String idUser = "";
+            for (users us : listUser) {
+                if (user.equalsIgnoreCase(us.getMa())) {
+                    idUser = us.getId();
+                }
+            }
             //update hoa don
             long millis = System.currentTimeMillis();
             java.sql.Date date = new java.sql.Date(millis);
             int trangThai = 1;
 
-            HoaDon hd = new HoaDon(kh.getId(), us.getId(), date, trangThai);
+            HoaDon hd = new HoaDon(kh.getId(), idUser, date, trangThai);
 //        hoaDonService.updateHoaDon(hd, idHD);
             if (hoaDonService.updateHoaDon(hd, idHD) > 0) {
                 JOptionPane.showMessageDialog(this, "Thành công");
@@ -1006,7 +1038,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
             txtTongTien.setText("");
             txtTienThua.setText("");
             txtTienKhachDua.setText("");
-            cbNhanVien.setSelectedIndex(0);
+            lblNV.setText("-");
             cbKhachHang.setSelectedIndex(0);
             dtmHoaDon = (DefaultTableModel) tbHoaDon.getModel();
             dtmHoaDon.removeRow(rowHD);
@@ -1221,6 +1253,10 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
         }
     }//GEN-LAST:event_btnPrintActionPerformed
 
+    private void tbChiTietSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbChiTietSanPhamMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbChiTietSanPhamMouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -1268,7 +1304,6 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
     private javax.swing.JComboBox<String> cbKhachHang;
     private javax.swing.JComboBox<String> cbKichCo;
     private javax.swing.JComboBox<String> cbMauSac;
-    private javax.swing.JComboBox<String> cbNhanVien;
     private javax.swing.JComboBox<String> cbTenQuanAo;
     private javax.swing.JComboBox<String> cbTheLoai;
     private javax.swing.JButton jButton2;
@@ -1297,6 +1332,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblMaHD;
+    private javax.swing.JLabel lblNV;
     private javax.swing.JPanel pnQR;
     private javax.swing.JTable tbChiTietSanPham;
     private javax.swing.JTable tbGioHang;
@@ -1339,6 +1375,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
                 for (ChiTietQuanAoRespone ctqa : listQuanAo) {
                     if (ma.equalsIgnoreCase(ctqa.getMaSP())) {
                         int slTon = ctqa.getSoLuong();
+                        String id = ctqa.getId();
                         String soLuongMuaStr = JOptionPane.showInputDialog(this, "bạn muốn số lượng bao nhiêu");
                         try {
                             int slMua = Integer.parseInt(soLuongMuaStr);
@@ -1347,6 +1384,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
                                 return;
                             }
                             int slSauMua = slTon - slMua;
+                            System.out.println(slSauMua);
 //                            insert cthd
                             ChiTietHoaDon cthd = new ChiTietHoaDon();
                             cthd.setIdHD(idHD);
@@ -1355,9 +1393,10 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
                             cthd.setDonGia(ctqa.getGiaTien());
                             chiTietHoaDonService.insert(cthd);
                             //update soluong
-                            String id = ctqa.getId();
+
                             chiTietQuanAoService.updateSoLuong(id, slSauMua);
-                            loadTableSP(chiTietQuanAoService.getAllCTQA());
+                            listQuanAo = chiTietQuanAoService.getAllCTQA();
+                            loadTableSP(listQuanAo);
                             //loadcthd
                             ChiTietHoaDonRespone chiTietHoaDon = new ChiTietHoaDonRespone();
                             chiTietHoaDon.setIdHD(this.idHD);
@@ -1373,7 +1412,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
                             getValuesTongTien();
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(this, "Không hợp lệ");
-                            return;
+//                            return;
                         }
                     }
                 }
