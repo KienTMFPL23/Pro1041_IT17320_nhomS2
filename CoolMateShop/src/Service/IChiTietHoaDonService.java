@@ -27,4 +27,6 @@ public interface IChiTietHoaDonService {
     Integer getSlMua(String id);
 
     Integer delete(String id);
+
+    String getIdQA(String id,String idqa);
 }

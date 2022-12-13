@@ -22,13 +22,13 @@ import javax.swing.table.TableRowSorter;
  * @author Long
  */
 public class FrameKhachHang extends javax.swing.JFrame {
-
+    
     private KhachHangService khService;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private int index = 1;
     private ButtonGroup btg;
     private String dataSDT;
-
+    
     public FrameKhachHang(String dataSDT) {
         initComponents();
         khService = new KhachHangService();
@@ -36,18 +36,19 @@ public class FrameKhachHang extends javax.swing.JFrame {
         loadTable();
         this.dataSDT = dataSDT;
         txt_sdt.setText(dataSDT);
+        setLocationRelativeTo(null);
     }
-
+    
     private FrameKhachHang() {
-
+        
     }
-
+    
     public void rdGioiTinh() {
         btg = new ButtonGroup();
         btg.add(rd_nu);
         btg.add(rd_nam);
     }
-
+    
     public void loadTable() {
         DefaultTableModel dtm = (DefaultTableModel) this.tb_khachHang.getModel();
         dtm.setRowCount(0);
@@ -63,7 +64,7 @@ public class FrameKhachHang extends javax.swing.JFrame {
             dtm.addRow(rowData);
         }
     }
-
+    
     public KhachHang getFormData() {
         String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
         SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
@@ -73,7 +74,7 @@ public class FrameKhachHang extends javax.swing.JFrame {
         Date ngaySinh = jdc_ngaySinh.getDate();
         String sdtStr = txt_sdt.getText().trim();
         String diaChi = txt_diaChi.getText().trim();
-
+        
         if (ma.length() == 0 || ten.length() == 0
                 || sdtStr.length() == 0 || diaChi.length() == 0) {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đủ các thông tin");
@@ -97,7 +98,7 @@ public class FrameKhachHang extends javax.swing.JFrame {
         int sdt = -1;
         try {
             sdt = Integer.parseInt(txt_sdt.getText().trim());
-
+            
             if (sdt < 0) {
                 JOptionPane.showMessageDialog(this, "Số điện thoai phải là số dương");
                 return null;
@@ -109,7 +110,7 @@ public class FrameKhachHang extends javax.swing.JFrame {
         KhachHang kh = new KhachHang(id, ma, ten, ngaySinh, gioiTinh, sdtStr, diaChi);
         return kh;
     }
-
+    
     public void clearForm() {
         lbl_id.setText("-");
         txt_ten.setText("");
@@ -118,38 +119,38 @@ public class FrameKhachHang extends javax.swing.JFrame {
         txt_ma.setText("");
         txt_sdt.setText("");
     }
-
+    
     public void mouclick() {
-
+        
         int row = this.tb_khachHang.getSelectedRow();
-
+        
         if (row == -1) {
             return;
         }
-
+        
         String gt = tb_khachHang.getValueAt(row, 4).toString();
         if (gt.equalsIgnoreCase("Nam")) {
             rd_nam.setSelected(true);
         } else {
             rd_nu.setSelected(true);
         }
-
+        
         lbl_id.setText((String) tb_khachHang.getValueAt(row, 0).toString());
         txt_ma.setText((String) tb_khachHang.getValueAt(row, 1).toString());
         txt_ten.setText((String) tb_khachHang.getValueAt(row, 2).toString());
         txt_sdt.setText((String) tb_khachHang.getValueAt(row, 5).toString());
         txt_diaChi.setText((String) tb_khachHang.getValueAt(row, 6).toString());
-
+        
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String) tb_khachHang.getValueAt(row, 3));
-
+            
             jdc_ngaySinh.setDate(date);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -396,12 +397,12 @@ public class FrameKhachHang extends javax.swing.JFrame {
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
         int row = tb_khachHang.getSelectedRow();
-
+        
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần sửa");
             return;
         }
-
+        
         KhachHang kh = getFormData();
         if (kh != null) {
             this.khService.update(kh, kh.getId());
@@ -452,7 +453,7 @@ public class FrameKhachHang extends javax.swing.JFrame {
         // TODO add your handling code here:
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(((DefaultTableModel) tb_khachHang.getModel()));
         sorter.setRowFilter(RowFilter.regexFilter(txt_timKiem.getText()));
-
+        
         tb_khachHang.setRowSorter(sorter);
     }//GEN-LAST:event_txt_timKiemKeyReleased
 

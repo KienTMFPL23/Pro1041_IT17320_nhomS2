@@ -13,6 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 
 /**
  *
@@ -71,7 +74,7 @@ public class ChuyenManHinhcontroller {
                 case "SanPham":
                     FrameQuanLy ql = new FrameQuanLy();
                     ql.setVisible(true);
-                  ql.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    ql.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                     break;
                 case "KhachHang":
                     node = new KhachHangPanel();
@@ -81,6 +84,7 @@ public class ChuyenManHinhcontroller {
                     FrameBanHang bh = new FrameBanHang();
                     bh.setVisible(true);
                     bh.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    bh.setWebcam();
                     break;
 
                 case "DoiTra":

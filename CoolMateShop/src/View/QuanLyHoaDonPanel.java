@@ -38,7 +38,7 @@ public class QuanLyHoaDonPanel extends javax.swing.JPanel {
     private List<ChiTietHoaDonRespone> listCTHD;
     private DefaultTableModel dtmhd;
     private DefaultTableModel dtmcthd;
-    private DefaultComboBoxModel dcbm;
+    private DefaultComboBoxModel dcbmnv;
     private DefaultComboBoxModel dcbmKH;
     private String idHD = "";
 
@@ -57,18 +57,18 @@ public class QuanLyHoaDonPanel extends javax.swing.JPanel {
     }
 
     public void addComboNV() {
-        dcbm = (DefaultComboBoxModel) cbNV.getModel();
-        dcbm.removeAllElements();
-//        dcbm.addElement("");
+        dcbmnv = (DefaultComboBoxModel) cbNV.getModel();
+        dcbmnv.removeAllElements();
+        dcbmnv.addElement("");
         for (users us : usersSevice.getlist()) {
-            dcbm.addElement(us.getHoten());
+            dcbmnv.addElement(us.getHoten());
         }
     }
 
     public void addComboKH() {
         dcbmKH = (DefaultComboBoxModel) cbKH.getModel();
         dcbmKH.removeAllElements();
-//        dcbm.addElement("");
+        dcbmKH.addElement("");
         for (KhachHang KH : khachHangService.getList()) {
             dcbmKH.addElement(KH.getHoTen());
         }
@@ -246,7 +246,7 @@ public class QuanLyHoaDonPanel extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -258,8 +258,9 @@ public class QuanLyHoaDonPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -271,12 +272,12 @@ public class QuanLyHoaDonPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -74,4 +74,13 @@ public class ChiTietHoaDonService implements IChiTietHoaDonService {
         }
     }
 
+    @Override
+    public String getIdQA(String id, String idqa) {
+        try {
+            return cthdRepo.getIdQA(id, idqa);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }
