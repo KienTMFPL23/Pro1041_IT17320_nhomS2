@@ -242,7 +242,7 @@ public class ChiTietQuanAoRepository implements IChiTietQuanAoRepository {
     public Integer updateSoLuong(String ma, int soLuong) {
         try {
             Connection conn = DBcontext.getConnection();
-            String sql = "UPDATE ChiTietQuanAo SET  SoLuong = ? WHERE Id = ?";
+            String sql = "UPDATE ChiTietQuanAo SET  SoLuong = ? WHERE MaQuanAo = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, soLuong);

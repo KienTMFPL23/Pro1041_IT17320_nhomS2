@@ -1375,7 +1375,7 @@ public class FrameBanHang extends javax.swing.JFrame implements Runnable, Thread
                 for (ChiTietQuanAoRespone ctqa : listQuanAo) {
                     if (ma.equalsIgnoreCase(ctqa.getMaSP())) {
                         int slTon = ctqa.getSoLuong();
-                        String id = ctqa.getId();
+                        String id = ctqa.getMaSP();
                         String soLuongMuaStr = JOptionPane.showInputDialog(this, "bạn muốn số lượng bao nhiêu");
                         try {
                             int slMua = Integer.parseInt(soLuongMuaStr);
